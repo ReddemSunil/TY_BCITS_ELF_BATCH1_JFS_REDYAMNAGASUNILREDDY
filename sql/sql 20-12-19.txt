@@ -1,90 +1,25 @@
 show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| bcits              |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
+
  use bcits;
  alter table student
     -> add column mobileno int;
-+-----+----------+-------+-------------------+------------+----------+
-| Sid | name     | marks | email             | branch     | mobileno |
-+-----+----------+-------+-------------------+------------+----------+
-|   1 | sunil    | 78.00 | rnsunil@gmail.com | ece        |     NULL |
-|   2 | subbu    | 68.36 | subbu@gamil.com   | eee        |     NULL |
-|   3 | nagendra | 68.00 | nag@gmail.com     | NULL       |     NULL |
-|   4 | abhi     | 71.00 | abhi17@gamil.com  | mechanical |     NULL |
-|   5 | balu     | 88.00 | balu@gmail.com    | bsc        |     NULL |
-|   6 | ravi     | 60.00 | ravi@gmail.com    | eee        |     NULL |
-+-----+----------+-------+-------------------+------------+----------+
+
  alter table student
     -> drop column mobileno;
------+----------+-------+-------------------+------------+
-| Sid | name     | marks | email             | branch     |
-+-----+----------+-------+-------------------+------------+
-|   1 | sunil    | 78.00 | rnsunil@gmail.com | ece        |
-|   2 | subbu    | 68.36 | subbu@gamil.com   | eee        |
-|   3 | nagendra | 68.00 | nag@gmail.com     | NULL       |
-|   4 | abhi     | 71.00 | abhi17@gamil.com  | mechanical |
-|   5 | balu     | 88.00 | balu@gmail.com    | bsc        |
-|   6 | ravi     | 60.00 | ravi@gmail.com    | eee        |
-+-----+----------+-------+-------------------+------------+
+
  create database sunil;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| bcits              |
-| mysql              |
-| performance_schema |
-| sunil              |
-| sys                |
-+--------------------+
+
 drop database sunil;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| bcits              |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
+
  rename table student to student1;
 select * from student1;
-+-----+----------+-------+-------------------+------------+
-| Sid | name     | marks | email             | branch     |
-+-----+----------+-------+-------------------+------------+
-|   1 | sunil    | 78.00 | rnsunil@gmail.com | ece        |
-|   2 | subbu    | 68.36 | subbu@gamil.com   | eee        |
-|   3 | nagendra | 68.00 | nag@gmail.com     | NULL       |
-|   4 | abhi     | 71.00 | abhi17@gamil.com  | mechanical |
-|   5 | balu     | 88.00 | balu@gmail.com    | bsc        |
-|   6 | ravi     | 60.00 | ravi@gmail.com    | eee        |
-+-----+----------+-------+-------------------+------------+
+
  rename database bcits to bci;///////////////////////////////////////////////ERROR
 
 create table Employee(eid int primary key,name varchar(150),mobileno bigint not null,emailid varchar(150),dob date,salary double(8,2),deptid int,doj date,bloodgroup varchar(10),gender varchar(10));
 
  desc employee;
-+------------+--------------+------+-----+---------+-------+
-| Field      | Type         | Null | Key | Default | Extra |
-+------------+--------------+------+-----+---------+-------+
-| eid        | int(11)      | NO   | PRI | NULL    |       |
-| name       | varchar(150) | YES  |     | NULL    |       |
-| mobileno   | bigint(20)   | NO   |     | NULL    |       |
-| emailid    | varchar(150) | YES  |     | NULL    |       |
-| dob        | date         | YES  |     | NULL    |       |
-| salary     | double(8,2)  | YES  |     | NULL    |       |
-| deptid     | int(11)      | YES  |     | NULL    |       |
-| doj        | date         | YES  |     | NULL    |       |
-| bloodgroup | varchar(10)  | YES  |     | NULL    |       |
-| gender     | varchar(10)  | YES  |     | NULL    |       |
-+------------+--------------+------+-----+---------+-------+
+
 
 insert into employee_info values( 100,'bharat',8425169378,'baratpcwire@gmail.com','1993-11-20','cleark',16000.00,30,'2016-03-19','O+','male',40),(102,'raina',6300897856,'raina@gmail.com','1997-05-04','cleark',17000,30,'2017-02-23','A+','male',32),
 (111,'sunil',9502774436,'rnsunil@gamil.com','1998-07-13','software developer',20000.00,10,'2019-02-02','O+','male',22),
@@ -93,20 +28,5 @@ insert into employee_info values( 100,'bharat',8425169378,'baratpcwire@gmail.com
 
 
 select * from employee_info;
-+-----+----------+------------+-----------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
-| eid | name     | mobileno   | emailid               | dob        | designation        | salary   | deptid | doj        | bloodgroup | gender | age  |
-+-----+----------+------------+-----------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
-| 100 | bharat   | 8425169378 | baratpcwire@gmail.com | 1993-11-20 | cleark             | 16000.00 |     30 | 2016-03-19 | O+         | male   |   40 |
-| 101 | krishna  | 9989281463 | NULL                  | NULL       | NULL               | 26000.00 |   NULL | NULL       | NULL       | NULL   |   48 |
-| 102 | raina    | 6300897856 | raina@gmail.com       | 1997-05-04 | cleark             | 17000.00 |     30 | 2017-02-23 | A+         | male   |   32 |
-| 111 | sunil    | 9502774436 | rnsunil@gamil.com     | 1998-07-13 | software developer | 20000.00 |     10 | 2019-02-02 | O+         | male   |   22 |
-| 222 | subbu    | 7989632513 | subbu1726@gmail.com   | 1997-10-01 | tester             | 18000.00 |     20 | 2019-02-01 | A+         | male   |   22 |
-| 333 | nagendra | 6300277396 | naglakki@gmail.com    | 1997-08-12 | cleark             | 15000.00 |     30 | 2018-03-23 | B+         | male   |   19 |
-| 444 | abhijit  | 9315242716 | abhijitsaha@gmail.com | 1996-10-08 | hr                 | 19000.00 |     40 | 2015-07-15 | AB+        | male   |   35 |
-| 555 | kiran    | 9745682816 | kiran1524@gmail.com   | 1997-05-12 | analyst            | 25000.00 |     10 | 2017-06-18 | B+         | male   |   32 |
-| 666 | rajini   | 8965241574 | rajinikanth@gmail.com | 1995-01-26 | tester             | 18000.00 |     20 | 2019-02-01 | A+         | male   |   48 |
-| 777 | suresh   | 9381993855 | suresh201@gmail.com   | 1994-05-19 | manager            | 30000.00 |     20 | 2014-06-22 | O+         | male   |   26 |
-| 888 | vikram   | 9364157896 | vikaramkn@gmail.com   | 1992-12-09 | hr                 | 19000.00 |     40 | 2015-04-15 | A+         | male   |   19 |
-| 999 | charan   | 9966452317 | charanbtm@gmail.com   | 1998-11-27 | software developer | 20000.00 |     10 | 2018-07-05 | B+         | male   |   32 |
-+-----+----------+------------+-----------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+
 
