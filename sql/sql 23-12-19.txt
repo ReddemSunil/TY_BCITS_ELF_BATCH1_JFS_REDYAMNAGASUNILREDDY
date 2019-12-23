@@ -40,5 +40,70 @@ rollback;
 
 commit;
 
+savepoint test;
 
+update employee_info set name='raju' where eid=102;
+
+savepoint test1;
+
+delete from employee_info where eid=101;
+
+ select * from employee_info;
++-----+--------------+------------+-------------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+| eid | name         | mobileno   | emailid                 | dob        | designation        | salary   | deptid | doj        | bloodgroup | gender | age  |
++-----+--------------+------------+-------------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+| 100 | bharat       | 8425169378 | baratpcwire@gmail.com   | 1993-11-20 | cleark             | 16000.00 |     30 | 2016-03-19 | O+         | male   |   40 |
+| 102 | raju         | 6300897856 | raina@gmail.com         | 1997-05-04 | cleark             | 17000.00 |     30 | 2017-02-23 | A+         | male   |   32 |
+| 104 | bhanu prasad | 7989984204 | bhanukadiayal@gmail.com | 1997-04-17 | hr                 | 22000.00 |     20 | 2019-05-12 | O-         | male   |   23 |
+| 111 | sunil        | 9502774436 | rnsunil@gamil.com       | 1998-07-13 | software developer | 20000.00 |     10 | 2019-02-02 | O+         | male   |   22 |
+| 222 | subbu        | 7989632513 | subbu1726@gmail.com     | 1997-10-01 | tester             | 18000.00 |     20 | 2019-02-01 | A+         | male   |   22 |
+| 333 | nagendra     | 6300277396 | naglakki@gmail.com      | 1997-08-12 | cleark             | 15000.00 |     30 | 2018-03-23 | B+         | male   |   19 |
+| 444 | abhijit      | 9315242716 | abhijitsaha@gmail.com   | 1996-10-08 | hr                 | 19000.00 |     40 | 2015-07-15 | AB+        | male   |   35 |
+| 555 | kiran        | 9745682816 | kiran1524@gmail.com     | 1997-05-12 | analyst            | 25000.00 |     10 | 2017-06-18 | B+         | male   |   32 |
+| 666 | rajini       | 8965241574 | rajinikanth@gmail.com   | 1995-01-26 | tester             | 18000.00 |     20 | 2019-02-01 | A+         | male   |   48 |
+| 777 | suresh       | 9381993855 | suresh201@gmail.com     | 1994-05-19 | manager            | 30000.00 |     20 | 2014-06-22 | O+         | male   |   26 |
+| 888 | vikram       | 9364157896 | vikaramkn@gmail.com     | 1992-12-09 | hr                 | 19000.00 |     40 | 2015-04-15 | A+         | male   |   19 |
+| 999 | charan       | 9966452317 | charanbtm@gmail.com     | 1998-11-27 | software developer | 20000.00 |     10 | 2018-07-05 | B+         | male   |   32 |
++-----+--------------+------------+-------------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+
+ rollback to test;
+
+ select * from employee_info;
++-----+--------------+------------+-------------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+| eid | name         | mobileno   | emailid                 | dob        | designation        | salary   | deptid | doj        | bloodgroup | gender | age  |
++-----+--------------+------------+-------------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+| 100 | bharat       | 8425169378 | baratpcwire@gmail.com   | 1993-11-20 | cleark             | 16000.00 |     30 | 2016-03-19 | O+         | male   |   40 |
+| 101 | krishna      | 9989281463 | NULL                    | NULL       | NULL               | 26000.00 |   NULL | NULL       | NULL       | NULL   |   48 |
+| 102 | raina        | 6300897856 | raina@gmail.com         | 1997-05-04 | cleark             | 17000.00 |     30 | 2017-02-23 | A+         | male   |   32 |
+| 104 | bhanu prasad | 7989984204 | bhanukadiayal@gmail.com | 1997-04-17 | hr                 | 22000.00 |     20 | 2019-05-12 | O-         | male   |   23 |
+| 111 | sunil        | 9502774436 | rnsunil@gamil.com       | 1998-07-13 | software developer | 20000.00 |     10 | 2019-02-02 | O+         | male   |   22 |
+| 222 | subbu        | 7989632513 | subbu1726@gmail.com     | 1997-10-01 | tester             | 18000.00 |     20 | 2019-02-01 | A+         | male   |   22 |
+| 333 | nagendra     | 6300277396 | naglakki@gmail.com      | 1997-08-12 | cleark             | 15000.00 |     30 | 2018-03-23 | B+         | male   |   19 |
+| 444 | abhijit      | 9315242716 | abhijitsaha@gmail.com   | 1996-10-08 | hr                 | 19000.00 |     40 | 2015-07-15 | AB+        | male   |   35 |
+| 555 | kiran        | 9745682816 | kiran1524@gmail.com     | 1997-05-12 | analyst            | 25000.00 |     10 | 2017-06-18 | B+         | male   |   32 |
+| 666 | rajini       | 8965241574 | rajinikanth@gmail.com   | 1995-01-26 | tester             | 18000.00 |     20 | 2019-02-01 | A+         | male   |   48 |
+| 777 | suresh       | 9381993855 | suresh201@gmail.com     | 1994-05-19 | manager            | 30000.00 |     20 | 2014-06-22 | O+         | male   |   26 |
+| 888 | vikram       | 9364157896 | vikaramkn@gmail.com     | 1992-12-09 | hr                 | 19000.00 |     40 | 2015-04-15 | A+         | male   |   19 |
+| 999 | charan       | 9966452317 | charanbtm@gmail.com     | 1998-11-27 | software developer | 20000.00 |     10 | 2018-07-05 | B+         | male   |   32 |
++-----+--------------+------------+-------------------------+------------+--------------------+----------+--------+------------+------------+--------+------+
+
+cross joins:
+
+select * from employee_info cross join department;///ANSI JOIN
+select * from employee_info,department;///ORACLE JOIN
+
+inner join:
+
+select * from employee_info inner join department on employee_info.deptid=department.deptid;///ANSI JOIN
+select * from employee_info,department where employee_info.deptid=department.deptid;///ORACLE JOIN
+
+left outer join:
+
+select * from employee_info  left outer join department  on employee_info.deptid=department.deptid;
+
+right outer join:
+
+select * from employee_info  right outer join department  on employee_info.deptid=department.deptid;
+
+ 
 
