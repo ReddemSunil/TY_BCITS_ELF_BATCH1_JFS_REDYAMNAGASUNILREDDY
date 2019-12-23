@@ -1,0 +1,44 @@
+select upper(name) from employee_info;
+
+select length(name) from employee_info;
+
+select concat(name,salary) from employee_info;
+
+select reverse(name) from employee_info;
+
+
+select avg(salary) from employee_info;
+
+select max(salary) from employee_info;
+
+select min(salary) from employee_info;
+
+select count(deptid) from employee_info where salary>20000;
+
+select sum(salary) from employee_info where deptid=20;
+
+select substr(name,1,2) from employee_info;
+
+select instr(name,'in')from employee_info;
+
+create table department(deptid int,dname varchar(150),loc varchar(200));
+
+insert into department values(10,'admin','bangalore')
+    -> ,(20,'hr','chennai'),(30,'sales','pune'),(40,'admin','vizag');
+
+ select * from employee_info order by salary;
+
+select count(*) from employee_info where age>30 group by deptid having avg(salary)>20000;
+
+select max(salary),name from employee_info where age>25 group by deptid having avg(salary)>25000;
+
+set auto commit=0;
+
+insert into employee_info values(103,'bhanu prasad',7989984204,'bhanukadiayal@gmail.com','1997-04-17','hr',22000,20,'2019-05-12','O-','male',23);
+
+rollback;
+
+commit;
+
+
+
