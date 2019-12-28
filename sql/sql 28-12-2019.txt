@@ -1,0 +1,24 @@
+create database employee_management;
+
+create table employee_primary_info(empid int primary key,name varchar(150),mobileno long,official_mail varchar(150),
+    -> date_of_birth date,date_of_joining date,designation varchar(150),blood_group varchar(100),salary double(8,2),deptid int,manager_id int);
+
+insert into employee_primary_info values(100,'sunil',9502774436,'rnsunil.software@gmail.com','1998-07-13','2019-02-01','software developer','O+',25000,10,201),(101,'subbu',7989632513,'subbu@gmail.com','1997-10-01','2019-02-05','software developer','A+',26000,20,202),(102,'nagendra',6300277396,'naglakki@gmail.com','1997-08-17','2019-01-15','tester','B-',21000,30,203),(103,'pavan',9502447536,'pavankadiyal@gmail.com','1996-02-25','2017-02-08','hr','AB-',18000,20,202),
+(104,'kalyan',9505953526,'kalayanakula@gmail.com','1996-06-12','2019-08-25','cleark','O-',15000,10,201),(105,'madhav',6300798963,'madhavbhumireddy@gmail.com','2000-12-24','2020-02-26','tester','A+',20000,30,204),(106,'badhri',9745256315,'bhadrikonda@gmail.com','2000-11-25','2020-03-15','cleark','AB-',18000,40,204),(107,'abhi',9725154528,'abhijitsaha@gmail.com','1996-10-08','2020-01-09','software developer','O+',23000,10,201),(108,'venky',9502774412,'venkykn@gmail.com','1995-07-24','2019-10-04','tester','B+',15000,40,204),(109,'anil',9845127836,'anilgadam@gmail.com','1997-05-19','2015-02-28','hr','B-',16000,20,202); 
+
+ create table employee_secondary_info(empid int primary key,gender varchar(50),personal_mail varchar(150),age int,nationality varchar(100),ismarried varchar(50),gov_id varchar(150),gourdian_name varchar(150),gourdian_contactno long,job_location varchar(150));
+
+insert into employee_secondary_info values(100,'male','rnsunil1432@gmail.com',21,'india','no','adhar','v.subbareddy',9490444439,'bangalore'),(101,'male','subba1726@gmail.com',23,'india','yes','passport','subbaih',6300277456,'bangalore'),(102,'male','naglakki27@gmail.com',22,'america','yes','voter','jogireddy',7896541253,'chennai'),
+    -> (103,'male','pavankomala@gamil.com',20,'south africa','yes','voter','venkatesh',9856241578,'hyderabad'),
+    -> (104,'male','akulakalyan@gmail.com',24,'west indies','yes','passport','suresh',9381985542,'pune'),
+    -> (105,'male','bhumireddy@gmail.com',42,'india','yes','adhar','ramadevi',9704152689,'andhra'),
+    -> (106,'male','kondabadhri@gmail.com',30,'pakistan','null','kondareddy',6514238974,'mumbai'),
+    -> (107,'male','abhijitsaha17@gmail.com',25,'india','no','passport','abhiranjan',9314568720,'bangalore'),
+    -> (108,'male','venkyjkomma@gmal.com',24,'india','yes','adhar','venkaiah',8956124736,'chennai'),
+    -> (109,'male','gadamshettyanil@gmail.com',32,'west indies','yes','voter','subbaramireddy',9502663314,'pune');   
+
+create table department_info(deptid int primary key,deptname varchar(150),deptmanagerid int);
+
+insert into department_info values(10,'account',201),(20,'sales',202),(30,'hr',203),(40,'account',204),(50,'admin',205),(60,'sales',206),(70,'hr',207);
+
+create table employee_bank_info(empid int primary key,accountno long,bank_name varchar(200),branch_name varchar(200),ifsc_code varchar(100));                       
