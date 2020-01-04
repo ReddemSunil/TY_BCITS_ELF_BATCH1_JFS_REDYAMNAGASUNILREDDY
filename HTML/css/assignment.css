@@ -1,0 +1,27 @@
+div{
+    margin-left: 200px;
+    border: 0px solid;
+    background-color: rgb(253, 193, 82);
+    width: 500px;
+    height: 229px;
+}
+h1{
+    color: white;
+    text-align: center;
+}
+h4{
+    color: white;
+    text-align: center;
+}
+input[type="email"][placeholder="  NAME@EXAMPLE.COM"]{
+    width: 300px;
+    height: 25px;
+    margin-left: 25px;
+}
+input[type="search"][placeholder="SIGN UP"]{
+    text-align: center;
+    width: 80px;
+    height: 31px;
+    background-color:palevioletred;
+}
+}
