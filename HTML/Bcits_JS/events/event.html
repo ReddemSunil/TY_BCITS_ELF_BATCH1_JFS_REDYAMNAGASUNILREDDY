@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .prop {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="showAlert()">click me!!!</button>
+
+    <button onclick="elementCreation()">Click to create element</button>
+    <h1 id="disp" class="prop">Display Properties</h1>
+    <button id="element" onclick="displayElement()">Click this to show h1 element</button>
+
+
+    <p onmouseover="mouseIn()" onmouseout="mouseOut()" id="mouse">mouse over on me!!!</p>
+
+    <input  onkeyup="showData()" onkeydown="showDetail()" id='myinput'/>
+
+    <input onkeyup="getInputValue()" id='input'>
+    <h1 id='p'></h1>
+
+
+    <script src="event.js"></script>
+</body>
+
+</html>

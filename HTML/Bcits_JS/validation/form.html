@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form name="loginForm" onsubmit="validateForm();return false" >
+        Email: <br>
+        <input type="email" name="userEmail" placeholder="Enter Your Email">
+        <p id="emailErr" style="color: red; font-size: 10px; display: none;">email is invalid</p>
+        <br>
+        Password: <br>
+        <input type="password" name="userPwd" placeholder="Enter Your Password" > <br><br>
+        <input type="Submit" name="" value="Login">
+    </form>
+    <script src="form.js"></script>
+</body>
+</html>

@@ -9,6 +9,6 @@ console.log(element.textContent);
 
 var pelement=document.createElement('p')
 pelement.textContent='hi'
-document.body.p.appendChild(pelement)
+document.body.appendChild(pelement)
 pelement.style.fontSize='40px'
 pelement.style.color='red'
