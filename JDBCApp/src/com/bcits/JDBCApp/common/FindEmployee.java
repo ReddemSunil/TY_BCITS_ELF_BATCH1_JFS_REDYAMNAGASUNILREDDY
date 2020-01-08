@@ -21,9 +21,9 @@ public class FindEmployee {
 			 */
 			Class.forName("com.mysql.jdbc.Driver");
 
-			String url = "jdbc:mysql://localhost :3306/employee_management?";
 //			String url = "jdbc:mysql://localhost :3306/employee_management?user=root&password=root";
 //			con = DriverManager.getConnection(url);
+			String url = "jdbc:mysql://localhost :3306/employee_management?";
 			con = DriverManager.getConnection(url, "root", "root");
 
 			String qry = " select * from employee_primary_info " 

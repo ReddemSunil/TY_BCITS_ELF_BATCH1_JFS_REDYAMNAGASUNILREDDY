@@ -55,23 +55,24 @@ public class MyFirstjdbcProgram {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			// 5. close all "jdbc objects"
-			try {
-				if(con!=null) {
-					con.close();
-				}
-				if(rs!=null) {
-					rs.close();
-				}
-				if(stmt!=null) {
-					stmt.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} 
+//			finally {
+//			// 5. close all "jdbc objects"
+//			try {
+//				if (con != null) {
+//					con.close();
+//				}
+//				if (rs != null) {
+//					rs.close();
+//				}
+//				if (stmt != null) {
+//					stmt.close();
+//				}
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
-		}
+//		}
 	}
 }

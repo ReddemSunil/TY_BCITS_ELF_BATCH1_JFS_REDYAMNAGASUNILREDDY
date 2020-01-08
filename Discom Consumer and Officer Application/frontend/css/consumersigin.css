@@ -1,0 +1,21 @@
+.head{
+    border: 0px solid;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(150, 62, 233);
+}
+.body{
+    margin-left: 620px
+
+}
+.button{
+    background-color: darkgreen;
+    margin-left: 770px;
+}
+.background{
+    background-image: url(/frontend/images/earth-2581631__340.webp);
+    background-size: 100% 100%;
+}
+label{
+    color: darkorange;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="/frontend/css/consumersigin.css">
+<link rel="stylesheet" href="/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+
+<body class="background">
+    <div class="head">
+        <div>
+            <h1 style="text-align: center; padding-top: 28px; color: fuchsia;">Discom Consumer Page</h1>
+        </div>
+    </div>
+    <div>
+        <form action="post" name="form"></form>
+        <h2 style="color: brown; text-align: center;">SignUp</h2>
+        <table class="body" cellpadding="10px">
+            <tr>
+                <td>
+                    <label for="meter">Meter No: </label>
+                </td>
+                <td>
+                    <input type="text" name="meterinput" id="meter" required>
+                </td>
+                <p id="meteralert" style="display: none;">enter valid meter details</p>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="name">Name: </label>
+                </td>
+                <td>
+                    <input type="text" name="nameinput" id="name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="contact">Contact NO: </label>
+                </td>
+                <td>
+                    <input type="tel" name="contactinput" id="contact" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">Email: </label>
+                </td>
+                <td>
+                    <input type="email" name="Emailinput" id="email" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password: </label>
+                </td>
+                <td>
+                    <input type="password" name="passwordinput" id="password" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="house">House No: </label>
+                </td>
+                <td>
+                    <input type="text" name="houseinput" id="house" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Region">Region: </label>
+                </td>
+                <td>
+                    <select name="" id="">
+                        <option value="" selected disabled>select</option>
+                        <option value="">Residential consumers</option>
+                        <option value="">Commercial consumers</option>
+                        <option value="">Industries</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="adress">Address: </label>
+                </td>
+                <td>
+                   <textarea name="" id="" cols="30" rows="4"></textarea>
+                </td>
+            </tr>
+        </table>
+        <input type="button" value="SignUp" class="button" onclick="valid()">
+        </form>
+        <p style="text-align: center;">alreay you have a account? please <span><a href="">Login</a></span> </p>
+    </div>
+
+    <script src="/bootstap jquery/jquery-3.4.1.js"></script>
+    <script src="/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="/frontend/js/consumersigin.js"></script>
+</body>
+
+</html>
