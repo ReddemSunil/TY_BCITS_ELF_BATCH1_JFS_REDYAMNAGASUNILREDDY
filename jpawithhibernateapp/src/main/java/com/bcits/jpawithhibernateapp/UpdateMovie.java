@@ -7,30 +7,23 @@ import javax.persistence.Persistence;
 
 import com.bcits.jpawithhibernateapp.bean.Test;
 
-public class App {
+public class UpdateMovie {
 	public static void main(String[] args) {
-		EntityTransaction transaction = null;
-		EntityManager manager = null;
-
-		Test test = new Test();
-		test.setMid(7);
-		test.setMovieName("spiderman");
-		test.setMovieRating("good");
-
+		EntityManager manager=null;
+		EntityTransaction transaction=null;
 		try {
-			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
+			EntityManagerFactory entityManagerFactory=Persistence.createEntityManagerFactory("test");
 			manager = entityManagerFactory.createEntityManager();
-			transaction = manager.getTransaction();
+			 transaction=manager.getTransaction();
 			transaction.begin();
-			manager.persist(test);
-			System.out.println("record saved");
+			Test info=manager.find(Test.class, 7);
+			info.setMovieRating("best");
 			transaction.commit();
+			System.out.println("record updated");
 		} catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();
-		} finally {
-
-			manager.close();
 		}
-	}//end of main
-}//end of class
+		manager.close();
+	}
+}

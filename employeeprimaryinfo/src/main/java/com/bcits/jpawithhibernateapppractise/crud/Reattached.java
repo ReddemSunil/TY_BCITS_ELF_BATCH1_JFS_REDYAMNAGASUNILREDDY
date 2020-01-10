@@ -1,36 +1,36 @@
-package com.bcits.jpawithhibernateapp;
+package com.bcits.jpawithhibernateapppractise.crud;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.bcits.jpawithhibernateapp.bean.Test;
+import com.bcits.jpawithhibernateapppractise.bean.EmployeePrimaryInfo;
 
-public class App {
+public class Reattached {
 	public static void main(String[] args) {
-		EntityTransaction transaction = null;
 		EntityManager manager = null;
-
-		Test test = new Test();
-		test.setMid(7);
-		test.setMovieName("spiderman");
-		test.setMovieRating("good");
-
+		EntityTransaction transaction = null;
 		try {
 			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
 			manager = entityManagerFactory.createEntityManager();
 			transaction = manager.getTransaction();
 			transaction.begin();
-			manager.persist(test);
-			System.out.println("record saved");
+			EmployeePrimaryInfo info = manager.find(EmployeePrimaryInfo.class, 101);
+			System.out.println(manager.contains(info));
+			manager.detach(info);
+			System.out.println(manager.contains(info));
+			EmployeePrimaryInfo reattach=manager.merge(info);
+ 
+			reattach.setDesignation("software");
 			transaction.commit();
+			System.out.println("record updated");
 		} catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();
 		} finally {
-
 			manager.close();
 		}
-	}//end of main
-}//end of class
+
+	}
+}
