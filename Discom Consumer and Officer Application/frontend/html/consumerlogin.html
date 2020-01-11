@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    <div class="head">
-        <div>
-            <h1 style="text-align: center; padding-top: 28px; color: fuchsia;">Login Page</h1>
+<link rel="stylesheet" href="/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/frontend/css/consumerlogin.css">
+<body class="backgroundimg">
+    <div class="row ">
+      <div class="head">
+        <div><h1>Discom Consumer</h1></div>
+      </div>
+        <div class="mx-auto d-block ">
+          
+            <h1 style="color: hotpink;">Login Page</h1>
+            <form>
+                <div class="form-group ">
+                  <label for="exampleInputEmail1" class="color">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="color" id="password">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1" style="color: gold;">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="valid()">LogIn</button> <br>
+                <p style="color: gold;">you don't have an account Please Register? <span><a href="/frontend/html/consumersignin.html">SignUp</a></span> </p>
+              </form>
+
         </div>
+
     </div>
+    <script src="/bootstap jquery/jquery-3.4.1.js"></script>
+    <script src="/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
