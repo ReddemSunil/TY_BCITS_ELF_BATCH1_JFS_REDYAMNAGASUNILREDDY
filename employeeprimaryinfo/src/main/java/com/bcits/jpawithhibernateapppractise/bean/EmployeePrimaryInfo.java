@@ -2,15 +2,27 @@ package com.bcits.jpawithhibernateapppractise.bean;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.bcits.jpawithhibernate.OnetoOne.EmployeeSecondaryInfo;
+import com.bcits.jpawithhibernate.manytomany.ProjectInfo;
+import com.bcits.jpawithhibernate.onetomany.EmployeeAddressInfo;
 
+import lombok.Data;
+import lombok.ToString.Exclude;
+
+@Data
 @Entity
-@Table(name="employee_primary_info")
+@Table(name = "employee_primary_info")
 public class EmployeePrimaryInfo implements Serializable {
 	@Id
 	@Column
@@ -36,92 +48,71 @@ public class EmployeePrimaryInfo implements Serializable {
 	@Column
 	private int manager_id;
 
-	public int getEmpid() {
-		return empid;
-	}
-
-	public void setEmpid(int empid) {
-		this.empid = empid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public long getMobileno() {
-		return mobileno;
-	}
-
-	public void setMobileno(long mobileno) {
-		this.mobileno = mobileno;
-	}
-
-	public String getOfficial_mail() {
-		return official_mail;
-	}
-
-	public void setOfficial_mail(String official_mail) {
-		this.official_mail = official_mail;
-	}
-
-	public Date getDate_of_birth() {
-		return date_of_birth;
-	}
-
-	public void setDate_of_birth(Date date_of_birth) {
-		this.date_of_birth = date_of_birth;
-	}
-
-	public Date getDate_of_joining() {
-		return date_of_joining;
-	}
-
-	public void setDate_of_joining(Date date_of_joining) {
-		this.date_of_joining = date_of_joining;
-	}
-
-	public String getDesignation() {
-		return designation;
-	}
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
-
-	public String getBlood_group() {
-		return blood_group;
-	}
-
-	public void setBlood_group(String blood_group) {
-		this.blood_group = blood_group;
-	}
-
-	public double getSalary() {
-		return salary;
-	}
-
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
-
-	public int getDeptid() {
-		return deptid;
-	}
-
-	public void setDeptid(int deptid) {
-		this.deptid = deptid;
-	}
-
-	public int getManager_id() {
-		return manager_id;
-	}
-
-	public void setManager_id(int manager_id) {
-		this.manager_id = manager_id;
-	}
+	@Exclude
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "primary")
+	private EmployeeSecondaryInfo secondaryInfo;
+	
+	@Exclude
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "primaryInfo")
+	private List<EmployeeAddressInfo> address;
+	
+	@Exclude
+	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "primaryInfo" )
+	private List<ProjectInfo> proList;
+	/*
+	 * public EmployeeSecondaryInfo getSecondaryInfo() { return secondaryInfo; }
+	 * 
+	 * public void setSecondaryInfo(EmployeeSecondaryInfo secondaryInfo) {
+	 * this.secondaryInfo = secondaryInfo; }
+	 * 
+	 * public int getEmpid() { return empid; }
+	 * 
+	 * public void setEmpid(int empid) { this.empid = empid; }
+	 * 
+	 * public String getName() { return name; }
+	 * 
+	 * public void setName(String name) { this.name = name; }
+	 * 
+	 * public long getMobileno() { return mobileno; }
+	 * 
+	 * public void setMobileno(long mobileno) { this.mobileno = mobileno; }
+	 * 
+	 * public String getOfficial_mail() { return official_mail; }
+	 * 
+	 * public void setOfficial_mail(String official_mail) { this.official_mail =
+	 * official_mail; }
+	 * 
+	 * public Date getDate_of_birth() { return date_of_birth; }
+	 * 
+	 * public void setDate_of_birth(Date date_of_birth) { this.date_of_birth =
+	 * date_of_birth; }
+	 * 
+	 * public Date getDate_of_joining() { return date_of_joining; }
+	 * 
+	 * public void setDate_of_joining(Date date_of_joining) { this.date_of_joining =
+	 * date_of_joining; }
+	 * 
+	 * public String getDesignation() { return designation; }
+	 * 
+	 * public void setDesignation(String designation) { this.designation =
+	 * designation; }
+	 * 
+	 * public String getBlood_group() { return blood_group; }
+	 * 
+	 * public void setBlood_group(String blood_group) { this.blood_group =
+	 * blood_group; }
+	 * 
+	 * public double getSalary() { return salary; }
+	 * 
+	 * public void setSalary(double salary) { this.salary = salary; }
+	 * 
+	 * public int getDeptid() { return deptid; }
+	 * 
+	 * public void setDeptid(int deptid) { this.deptid = deptid; }
+	 * 
+	 * public int getManager_id() { return manager_id; }
+	 * 
+	 * public void setManager_id(int manager_id) { this.manager_id = manager_id; }
+	 */
 
 }
