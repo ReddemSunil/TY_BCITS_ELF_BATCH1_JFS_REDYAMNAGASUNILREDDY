@@ -22,7 +22,7 @@ public class SearchEmployeeServlet2 extends HttpServlet{
 			String empvalId=req.getParameter("empId");
 			int empId=Integer.parseInt(empvalId);
 			
-			EntityManagerFactory emf=Persistence.createEntityManagerFactory("emsPersistenceUnit");
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("employee");
 			EntityManager manager=emf.createEntityManager();
 			
 			EmployeePrimaryInfo employeePrimaryInfo=manager.find(EmployeePrimaryInfo.class, empId);
