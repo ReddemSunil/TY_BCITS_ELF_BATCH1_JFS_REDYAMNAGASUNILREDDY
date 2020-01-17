@@ -33,9 +33,9 @@ public class SearchEmployeeServlet2 extends HttpServlet{
 				out.println("<html>");
 				out.println("<body>");
 				out.println("<h1 style='color:green'>Employee ID"+empId+"found</h1>");
-				out.println("name ="+employeePrimaryInfo.getName());
-				out.println("name ="+employeePrimaryInfo.getDesignation());
-				out.println("name ="+employeePrimaryInfo.getMobileno());
+				out.println("<br>name ="+employeePrimaryInfo.getName());
+				out.println("<br>name ="+employeePrimaryInfo.getDesignation());
+				out.println("<br>name ="+employeePrimaryInfo.getMobileno());
 				out.println("</body>");
 				out.println("</html>");
 				
