@@ -1,5 +1,6 @@
 .body{
     background-image: url(/frontend/images/earth-2581631__340.webp);
-    background-size: 100% 150%;
+    background-size: cover;
+    background-repeat: no-repeat;
     color:cyan;
 }

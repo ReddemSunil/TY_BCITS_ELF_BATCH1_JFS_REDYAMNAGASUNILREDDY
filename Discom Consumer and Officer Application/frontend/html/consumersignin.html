@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col">
           <label for="">Meter No</label>
-          <input type="text" class="form-control" placeholder="Meter number">
+          <input type="text" class="form-control" name="meter" placeholder="Meter number" required>
         </div>
       </div>
       <div class="row">
@@ -42,12 +42,16 @@
         <div class="col">
           <label for="">Email</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="email">
+            placeholder="email" required>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <label for="">Password</label>
+          <input type="password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="col">
+          <label for="">Confirm Password</label>
           <input type="password" class="form-control" placeholder="Password">
         </div>
       </div>
@@ -82,13 +86,14 @@
 
         </div>
         <div class="col">
-          <label for="inputZip">Zip</label>
+          <label for="inputZip">Pincode</label>
           <input type="text" class="form-control" id="inputZip">
         </div>
       </div><br>
-      <input class="mx-auto d-block bg-warning" type="button" value="SignIn">
-    </form>
+      <!-- <a href="/frontend/html/Home.html"> <input class="mx-auto d-block bg-warning" type="button" value="SignIn"></a> -->
+      <button class="mx-auto d-block bg-warning" type="submit" formaction="/frontend/html/consumerlogin.html">SignIn</button>
   </div>
+  <script src="/frontend/js/signin.js"></script>
   <script src="/bootstap jquery/jquery-3.4.1.js"></script>
   <script src="/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
 </body>

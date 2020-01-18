@@ -1,6 +1,9 @@
 .backgroundimg{
     background-image: url(/frontend/images/meter.webp);
-    background-size: 100% ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    
 }
 .color{
     color: cyan;
@@ -14,3 +17,9 @@
     color: darkgoldenrod;
 
 }
+.lineborder{
+    border: 1px solid rebeccapurple;
+ 
+    width: 444px;
+    height: 460px;
+    padding: 24px;
