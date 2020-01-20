@@ -35,7 +35,15 @@
 		<servlet-class>com.bcits.empwebapp.servlets.SearchEmployeeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>employeeServ</servlet-name>
+		<servlet-name>employeeServ</servlet-name>				
 		<url-pattern>/searchEmp</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>myfirstjsp</servlet-name>
+		<jsp-file>/myFirstJsp.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>myfirstjsp</servlet-name>
+		<url-pattern>/firstJsp</url-pattern>
 	</servlet-mapping>
 </web-app>
