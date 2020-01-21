@@ -1,0 +1,17 @@
+.backgroundimg{
+    background-image: url(/frontend/images/meter.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    
+}
+.color{
+    color: cyan;
+    font-size: medium;
+}
+.lineborder{
+    border: 1px solid rebeccapurple;
+ 
+    width: 444px;
+    height: 460px;
+    padding: 24px;
