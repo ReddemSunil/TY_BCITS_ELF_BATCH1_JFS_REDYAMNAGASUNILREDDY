@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- bean definitions here -->
+
+	<bean id="employee"
+		class="com.bcits.springcore.beans.EmployeeBean">
+		<property name="name" value="sunil" />
+		<property name="age" value="21" />
+		<property name="departmentBean" ref="department"></property>
+	</bean>
+
+
+	<bean id="department"
+		class="com.bcits.springcore.beans.DepartmentBean">
+		<property name="deptId" value="10" />
+		<property name="deptName" value="developer" />
+	</bean>
+</beans>
