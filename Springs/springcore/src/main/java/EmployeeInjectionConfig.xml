@@ -4,19 +4,62 @@
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- bean definitions here -->
-
+	
 	<bean id="employee"
+		class="com.bcits.springcore.beans.EmployeeBean" autowire="byType">
+		<property name="name" value="sunil" />
+		<property name="age" value="21" />
+	</bean>
+</beans>
+
+
+	<!-- <bean id="employee"
+		class="com.bcits.springcore.beans.EmployeeBean" autowire="constructor">
+		<constructor-arg name="name" value="sunil"/>
+		<constructor-arg name="age" value="21"/>
+	</bean> -->
+
+
+<!-- bean definitions here -->
+
+	<!-- <bean id="employee"
 		class="com.bcits.springcore.beans.EmployeeBean">
 		<property name="name" value="sunil" />
 		<property name="age" value="21" />
 		<property name="departmentBean" ref="department"></property>
-	</bean>
+	</bean> -->
 
-
-	<bean id="department"
-		class="com.bcits.springcore.beans.DepartmentBean">
+	<!-- <bean id="employee"
+		class="com.bcits.springcore.beans.EmployeeBean">
+		<constructor-arg name="name" value="sunil"/>
+		<constructor-arg name="age" value="21"/>
+		<constructor-arg name="departmentBean" ref="department"/>
+	</bean> -->
+	
+	
+	<!-- <bean id="employee"
+		class="com.bcits.springcore.beans.EmployeeBean" autowire="byType">
+		<property name="name" value="sunil" />
+		<property name="age" value="21" />
+	</bean> -->
+	
+	<!-- <bean id="dev"
+		class="com.bcits.springcore.beans.DepartmentBean" autowire-candidate="false">
 		<property name="deptId" value="10" />
 		<property name="deptName" value="developer" />
 	</bean>
-</beans>
+	<bean id="hr"
+		class="com.bcits.springcore.beans.DepartmentBean" primary="true">
+		<property name="deptId" value="10" />
+		<property name="deptName" value="hr" />
+	</bean>
+	<bean id="hr"
+		class="com.bcits.springcore.beans.DepartmentBean" autowire-candidate="default">
+		<property name="deptId" value="10" />
+		<property name="deptName" value="hr" />
+	</bean>
+	<bean id="test"
+		class="com.bcits.springcore.beans.DepartmentBean">
+		<property name="deptId" value="10" />
+		<property name="deptName" value="test" />
+	</bean> -->
