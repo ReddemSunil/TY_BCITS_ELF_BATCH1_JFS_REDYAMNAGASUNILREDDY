@@ -21,12 +21,12 @@
 				<tr>
 					<td>Employee Id</td>
 					<td> : </td>
-					<td><input type="text" name="empId"> </td>
+					<td><input type="text" name="empId" required> </td>
 				</tr>
 				<tr>
 					<td>password</td>
 					<td> : </td>
-					<td><input type="password" name="password"> </td>
+					<td><input type="password" name="password" required> </td>
 				</tr>
 				
 				<tr>

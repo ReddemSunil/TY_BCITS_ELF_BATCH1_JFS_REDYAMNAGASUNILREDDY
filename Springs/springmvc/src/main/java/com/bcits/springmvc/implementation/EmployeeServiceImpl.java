@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bcits.springmvc.beans.EmployeeInfoBean;
+import com.bcits.springmvc.customexception.EmployeeException;
 import com.bcits.springmvc.interfaces.EmployeeDAO;
 import com.bcits.springmvc.service.EmployeeService;
 
@@ -22,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public boolean addEmployee(EmployeeInfoBean employeeInfoBean) {
-		return false;
+		return dao.addEmployee(employeeInfoBean);
 	}
 
 	@Override
@@ -35,18 +36,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	@Override
 	public boolean updateEmployee(EmployeeInfoBean employeeInfoBean) {
-		return false;
+		return dao.updateEmployee(employeeInfoBean);
 	}
 
 	@Override
 	public EmployeeInfoBean getEmployee(int empId) {
-		
-		return dao.getEmployee(empId);
-	}
+		if(empId <1) {
+			throw new EmployeeException("Invalid Employee Id");
+		}
+		EmployeeInfoBean employeeInfoBean=dao.getEmployee(empId);
+		if(employeeInfoBean==null) {
+			throw new EmployeeException("Employee ID Not Found");
+		}
+		return employeeInfoBean;
+	}//End of getEmployee()
 
 	@Override
 	public List<EmployeeInfoBean> getAllEmployees() {
-		return null;
+		return dao.getAllEmployees();
 	}
 
 }

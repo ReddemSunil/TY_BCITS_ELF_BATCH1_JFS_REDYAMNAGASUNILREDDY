@@ -14,11 +14,11 @@ import lombok.Data;
 public class EmployeeInfoBean {
 	@Id
 	@Column(name="emp_id")
-	private int empId;
+	private Integer empId;
 	@Column
 	private String name;
 	@Column
-	private long mobileno;
+	private Long mobileno;
 	@Column(name="official_mail")
 	private String officialMail;
 	@Column(name="date_of_birth")
@@ -30,11 +30,11 @@ public class EmployeeInfoBean {
 	@Column(name="blood_group")
 	private String bloodGroup;
 	@Column
-	private double salary;
+	private Double salary;
 	@Column
-	private int deptid;
+	private Integer deptid;
 	@Column(name="manager_id")
-	private int managerId;
+	private Integer managerId;
 	@Column
 	private String password;
 }
