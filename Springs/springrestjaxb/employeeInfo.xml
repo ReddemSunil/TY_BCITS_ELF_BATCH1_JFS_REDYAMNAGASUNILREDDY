@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employee-id emp-id="111">
+    <name>sunil</name>
+    <mobileno>9502774436</mobileno>
+    <officialMail>rnsunil1432@gmail.com</officialMail>
+    <dateOfBirth>2020-01-28T12:10:31.645+05:30</dateOfBirth>
+    <dateOfJoining>2020-01-28T12:10:31.645+05:30</dateOfJoining>
+    <designation>ssd</designation>
+    <bloodGroup>o+</bloodGroup>
+    <salary>20000.0</salary>
+    <department-id>10</department-id>
+    <managerId>1</managerId>
+</employee-id>

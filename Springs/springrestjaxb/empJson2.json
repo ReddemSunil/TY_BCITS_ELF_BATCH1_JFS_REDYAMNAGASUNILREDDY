@@ -1,0 +1,13 @@
+{
+	"employeeId": 111,
+	"name": "sunil",
+	"mobileno": 9502774436,
+	"officialMail": "rnsunil1432@gmail.com",
+	"dateOfBirth": 1580208358356,
+	"dateOfJoining": 1580208358356,
+	"designation": "ssd",
+	"bloodGroup": "o+",
+	"salary": 20000.0,
+	"managerId": 1,
+	"departmentId": 10
+}

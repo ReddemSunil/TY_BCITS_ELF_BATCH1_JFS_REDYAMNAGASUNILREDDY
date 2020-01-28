@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<user-info>
+    <user-id>111</user-id>
+    <name>sunil</name>
+    <mobileno>9502774436</mobileno>
+    <officialMail>rnsunil1432@gmail.com</officialMail>
+    <dateOfBirth>2020-01-28T13:43:28.912+05:30</dateOfBirth>
+    <dateOfJoining>2020-01-28T13:43:28.912+05:30</dateOfJoining>
+    <designation>ssd</designation>
+    <bloodGroup>o+</bloodGroup>
+    <salary>20000.0</salary>
+    <department-id>10</department-id>
+    <managerId>1</managerId>
+    <userOtherInfo>
+        <gender>male</gender>
+        <adhar>236409918929</adhar>
+    </userOtherInfo>
+    <user-address-list>
+        <userAddressesList>
+            <house-num>11</house-num>
+            <street>murugeshpalya</street>
+            <city>banglore</city>
+            <address-type>116</address-type>
+        </userAddressesList>
+        <userAddressesList>
+            <house-num>51</house-num>
+            <street>marathalli</street>
+            <city>pune</city>
+            <address-type>112</address-type>
+        </userAddressesList>
+    </user-address-list>
+    <password>sunil</password>
+</user-info>
