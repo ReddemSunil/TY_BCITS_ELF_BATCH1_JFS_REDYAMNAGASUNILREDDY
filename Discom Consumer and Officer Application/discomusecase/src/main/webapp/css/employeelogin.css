@@ -1,0 +1,21 @@
+.backgroundimg{ 
+    background-image: url(../images/meter.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.color{
+    color: rgb(161, 173, 173);
+    font-size: medium;
+}
+.lineborder{
+    margin-top: 50px;
+    border: 1px solid rebeccapurple;
+    background-image: url(../images/power-poles-503935_1920.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    width: 444px;
+    height: 460px;
+    padding: 24px;
+}

@@ -15,7 +15,7 @@ import lombok.Data;
 public class ConsumerInfo implements Serializable{
 	@Id
 	@Column
-	private long meterNumber;
+	private String meterNumber;
 	@Column
 	private String password;
 	@Column
@@ -23,7 +23,7 @@ public class ConsumerInfo implements Serializable{
 	@Column
 	private String lastName;
 	@Column
-	private long contactNumber;
+	private Long contactNumber;
 	@Column
 	private String mail;
 	@Column
@@ -35,7 +35,7 @@ public class ConsumerInfo implements Serializable{
 	@Column
 	private String address2;
 	@Column
-	private int pincode;
+	private Integer pincode;
 	
 	
 	

@@ -1,0 +1,10 @@
+body{
+    background-image: url(/frontend/images/background.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.border{
+    border: gold;
+    width: 50%;
+    height: 500px;
+}

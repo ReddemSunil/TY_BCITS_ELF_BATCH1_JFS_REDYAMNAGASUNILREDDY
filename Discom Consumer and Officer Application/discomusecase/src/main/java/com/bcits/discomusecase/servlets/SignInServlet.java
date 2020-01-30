@@ -21,7 +21,7 @@ public class SignInServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String firstName= req.getParameter("firstName");
 		String lastName=req.getParameter("lastName");
-		long meterNumber=Long.parseLong(req.getParameter("meterNumber"));
+		String meterNumber=req.getParameter("meterNumber");
 		long contactNumber=Long.parseLong(req.getParameter("contactNumber"));
 		String mail=req.getParameter("mail");
 		String password=req.getParameter("password");

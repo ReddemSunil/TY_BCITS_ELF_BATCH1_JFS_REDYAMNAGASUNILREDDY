@@ -1,0 +1,19 @@
+.header{
+    border:1px solid royalblue;
+    background-color:lightgoldenrodyellow;
+    width: 100%;
+    height: 140px;
+}
+.button{
+    width:100%;
+    height:35%;
+    background-color: rgb(103, 103, 233);
+    margin-top: 20%;
+    color: coral;
+
+}
+.bgimg{
+    background-image:url(../images/power-poles-503935_1920.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
