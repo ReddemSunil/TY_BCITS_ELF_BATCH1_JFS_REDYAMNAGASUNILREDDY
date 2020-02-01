@@ -13,8 +13,8 @@ import lombok.Data;
 @Entity(name = "current_bill")
 public class ConsumerCurrentBill implements Serializable {
 	@Id
-	@Column(name = "meter_number")
-	private String meterNumber;
+	@Column(name = "rr_number")
+	private String rrNumber;
 	@Column(name = "units_conumed")
 	private Integer unitsConsumed;
 	@Column

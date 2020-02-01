@@ -42,8 +42,8 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<label for="">Meter No</label> <input type="text"
-						class="form-control" name="meterNumber" placeholder="Meter number"
+					<label for="">RRNumber</label> <input type="text"
+						class="form-control" name="rrNumber" placeholder="rr number"
 						required>
 				</div>
 			</div>

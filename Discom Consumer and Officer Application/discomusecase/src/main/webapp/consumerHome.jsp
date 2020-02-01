@@ -4,7 +4,6 @@
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -16,37 +15,47 @@
     <%@include file="./Bootstrap/bootstrap-4.4.1-dist/css/bootstrap.min.css" %>
     
 </style>
-<%-- <link rel="stylesheet" href="${bootstrap}/bootstrap-4.4.1-dist/css/bootstrap.min.css"> --%>
 <link rel="stylesheet" href="${css}/home.css">
+<link rel="stylesheet" href="${css}/dropdown.css">
 </head>
 <body class="image">
 	<nav class="navbar navbar-expand-lg navbar-light head"> <img
 		src="${images }/bcits.png" alt="" width="100px" height="100px">
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-		aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<div class="collapse navbar-collapse head" id="navbarNavDropdown">
-		<ul class="navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="">Home
-					<span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">History</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">AboutUs</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-		</ul>
+		<h2 style="color: blue;">
+			<ul class="navbar-nav">
+				<li class="nav-item nav-link">
+					<div class="dropdown">
+						<!-- <button class="dropbtn">Profile</button> -->
+						<label>Profile</label>
+						<div class="dropdown-content">
+
+							<a href="./consumerProfileOpen">Open</a> <a href="">Update</a>
+
+						</div>
+					</div>
+
+				</li>
+				<li class="nav-item active"><a class="nav-link"
+					href="../consumer/consumerLogin">Home <span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">History</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">AboutUs</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">LogOut</a></li>
+			</ul>
+		</h2>
 	</div>
 	</nav>
 	<div class="row">
 		<div class="col">
-			<br>
-			<br>
+			<br> <br>
 			<h1 style="color: brown; text-align: center;">Bill Detailes</h1>
-			<div class="borderbody">
+			<div>
 				<h3>
-					<table>
+					<table align="center">
 						<tr>
 							<td class="td">&nbsp;&nbsp;&nbsp;Meter Number</td>
 							<td class="td1">:</td>

@@ -34,8 +34,8 @@
 				<h1 style="color: gold; text-align: center;">Login Page</h1>
 				<form name="myform" method="post" action="../consumer/consumerLogin">
 					<div class="form-group">
-						<label for="" class="color" id="MeterNo" name="MeterNo">MeterNo</label>
-						<input type="text" class="form-control" id="meterno" required name="meterNumber">
+						<label for="" class="color" id="MeterNo" name="MeterNo">RRNumber</label>
+						<input type="text" class="form-control" id="meterno" required name="rrNumber">
 
 					</div>
 					<div class="form-group">

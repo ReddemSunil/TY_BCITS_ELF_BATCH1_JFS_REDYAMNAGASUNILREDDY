@@ -13,21 +13,21 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 	private ConsumerDAO dao;
 
 	@Override
-	public ConsumerInfo authenticate(String meterNumber, String password) {
-		for (int i = 0; i < meterNumber.length() - 1; i++) {
-			if (meterNumber.charAt(i) < 0) {
-				throw new ConsumerException("MeterNumber Should Not Contains Negative Values");
+	public ConsumerInfo authenticate(String rrNumber, String password) {
+		for (int i = 0; i < rrNumber.length() - 1; i++) {
+			if (rrNumber.charAt(i) < 0) {
+				throw new ConsumerException("rrNumber Should Not Contains Negative Values");
 			}
 
 		}
-		return dao.authenticate(meterNumber, password);
+		return dao.authenticate(rrNumber, password);
 	}// End of authenticate()
 
 	@Override
-	public boolean signinConumer(ConsumerInfo consumerInfo, String cPassword, String meterNumber) {
-		for (int i = 0; i < meterNumber.length() - 1; i++) {
-			if (meterNumber.charAt(i) < 0) {
-				throw new ConsumerException("MeterNumber Should Not Contains Negative Values");
+	public boolean signinConumer(ConsumerInfo consumerInfo, String cPassword, String rrNumber) {
+		for (int i = 0; i < rrNumber.length() - 1; i++) {
+			if (rrNumber.charAt(i) < 0) {
+				throw new ConsumerException("rrNumber Should Not Contains Negative Values");
 			}
 
 		}

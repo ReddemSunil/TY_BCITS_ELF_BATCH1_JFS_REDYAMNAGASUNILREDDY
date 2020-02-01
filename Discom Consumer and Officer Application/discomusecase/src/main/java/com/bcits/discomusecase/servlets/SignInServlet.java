@@ -38,7 +38,7 @@ public class SignInServlet extends HttpServlet{
 		consumerInfo.setFirstName(firstName);
 		consumerInfo.setLastName(lastName);
 		consumerInfo.setMail(mail);
-		consumerInfo.setMeterNumber(meterNumber);
+		consumerInfo.setRrNumber(meterNumber);
 		consumerInfo.setPassword(password);
 		consumerInfo.setPincode(pincode);
 		consumerInfo.setRegion(region);

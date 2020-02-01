@@ -17,10 +17,10 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 	private EntityManagerFactory factory;
 
 	@Override
-	public ConsumerInfo authenticate(String meterNumber, String password) {
+	public ConsumerInfo authenticate(String rrNumber, String password) {
 		EntityManager manager = factory.createEntityManager();
 
-		ConsumerInfo consumerInfo = manager.find(ConsumerInfo.class, meterNumber);
+		ConsumerInfo consumerInfo = manager.find(ConsumerInfo.class, rrNumber);
 		if (consumerInfo != null && consumerInfo.getPassword().equals(password)) {
 			return consumerInfo;
 		} else {

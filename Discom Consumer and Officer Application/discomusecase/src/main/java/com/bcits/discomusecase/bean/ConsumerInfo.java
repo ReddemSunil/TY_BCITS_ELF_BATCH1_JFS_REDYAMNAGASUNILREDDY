@@ -14,8 +14,8 @@ import lombok.Data;
 @Table(name = "consumer_info")
 public class ConsumerInfo implements Serializable {
 	@Id
-	@Column(name = "meter_number")
-	private String meterNumber;
+	@Column(name = "rr_number")
+	private String rrNumber;
 	@Column
 	private String password;
 	@Column(name = "first_name")

@@ -31,9 +31,14 @@ public class ConsumerController {
 		return "ConsumerLogin";
 	}//End of getConsumerLogin()
 	
+	@GetMapping("/consumerHomePage")
+	public String getConsumerHome() {
+		return "consumerHome";
+	}//End of getConsumerHome()
+	
 	@PostMapping("/consumerLogin")
-	public String consumerLogin(String meterNumber,String password,HttpServletRequest req,ModelMap modelMap) {
-		ConsumerInfo consumerInfo=service.authenticate(meterNumber, password);
+	public String consumerLogin(String rrNumber,String password,HttpServletRequest req,ModelMap modelMap) {
+		ConsumerInfo consumerInfo=service.authenticate(rrNumber, password);
 		if(consumerInfo!=null) {
 			//Valid Session
 			HttpSession session=req.getSession(true);
@@ -53,8 +58,8 @@ public class ConsumerController {
 	
 	
 	@PostMapping("/consumerSignin")
-	public String consumerSignin(ConsumerInfo consumerInfo,String cPassword,String meterNumber, ModelMap modelMap) {
-		if(service.signinConumer(consumerInfo, cPassword,meterNumber)) {
+	public String consumerSignin(ConsumerInfo consumerInfo,String cPassword,String rrNumber, ModelMap modelMap) {
+		if(service.signinConumer(consumerInfo, cPassword,rrNumber)) {
 			
 			modelMap.addAttribute("msg", "Signin Successfull");
 		}else {
@@ -62,5 +67,13 @@ public class ConsumerController {
 		}
 		return "ConsumerLogin";
 	}//End of consumerSignin()
+	
+	
+	@GetMapping("/consumerProfileOpen")
+	public String consumerProfileOpen(HttpSession session,ModelMap map) {
+		ConsumerInfo consumerInfo =(ConsumerInfo)session.getAttribute("validation");
+		map.addAttribute("consumerInfo", consumerInfo);
+		return "consumerProfileOpen";
+	}//End of consumerProfileOpen()
 
 }// End of class
