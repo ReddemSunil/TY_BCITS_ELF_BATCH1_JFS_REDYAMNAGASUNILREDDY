@@ -11,33 +11,44 @@ import org.springframework.stereotype.Repository;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 
 @Repository
-public class ConsumerDAOImpl implements ConsumerDAO{
-	
+public class ConsumerDAOImpl implements ConsumerDAO {
+
 	@PersistenceUnit
 	private EntityManagerFactory factory;
 
 	@Override
+	public ConsumerInfo authenticate(String meterNumber, String password) {
+		EntityManager manager = factory.createEntityManager();
+
+		ConsumerInfo consumerInfo = manager.find(ConsumerInfo.class, meterNumber);
+		if (consumerInfo != null && consumerInfo.getPassword().equals(password)) {
+			return consumerInfo;
+		} else {
+
+			return null;
+		}
+
+	}// End of authenticate()
+
+	@Override
 	public boolean signinConumer(ConsumerInfo consumerInfo) {
-		EntityManager manager=factory.createEntityManager();
-		
-		if(consumerInfo!=null) {
-			EntityTransaction transaction=manager.getTransaction();
-			
+		EntityManager manager = factory.createEntityManager();
+
+		if (consumerInfo != null) {
+			EntityTransaction transaction = manager.getTransaction();
+
 			try {
 				transaction.begin();
 				manager.persist(consumerInfo);
 				transaction.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
-				transaction.rollback();
 			}
 			manager.close();
-
 			return true;
-			
 		}
-		
-		return false;
-	}//End of signinConsumer()
 
-}//End of repository
+		return false;
+	}// End of signinConsumer()
+
+}// End of repository

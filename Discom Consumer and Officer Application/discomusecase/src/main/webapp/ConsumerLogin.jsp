@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%String errMsg=(String)request.getAttribute("errMsg"); 
+	String msg=(String)request.getAttribute("msg");
+	%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
@@ -12,13 +15,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>login</title>
-</head>
 <style type="text/css">
     <%@include file="./Bootstrap/bootstrap-4.4.1-dist/css/bootstrap.min.css" %>
     
 </style>
-<link rel="stylesheet" href="${css}/conusumerLogin.css">
-
+<link rel="stylesheet" href="${css}/consumerlogin.css">
+</head>
 <body class="backgroundimg">
 	<div class="container">
 		<div class="row mx-auto d-block">
@@ -30,16 +32,17 @@
 			<div class="mx-auto d-block lineborder ">
 
 				<h1 style="color: gold; text-align: center;">Login Page</h1>
-				<form name="myform">
+				<form name="myform" method="post" action="../consumer/consumerLogin">
 					<div class="form-group">
 						<label for="" class="color" id="MeterNo" name="MeterNo">MeterNo</label>
-						<input type="number" class="form-control" id="meterno" required>
+						<input type="text" class="form-control" id="meterno" required name="meterNumber">
 
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1" class="color" id="password"
-							name="name">Password</label> <input type="password"
-							class="form-control" id="exampleInputPassword1" required>
+							name="name">Password</label> 
+							<input type="password"
+							class="form-control" id="exampleInputPassword1" required name="password">
 
 					</div>
 					<div class="form-group form-check">
@@ -48,13 +51,21 @@
 							style="color: mintcream;">Check me out</label>
 					</div>
 					<button style="background-color: green;" type="submit"
-						formaction="">Login</button>
-					<!-- <a href="/frontend/html/Home.html"><input type="button" value="Login"style="background-color: green;"> <br></a> -->
+						>Login</button>
+						
+						<%if(errMsg!=null && !errMsg.isEmpty()){ %>
+							<h2 style="color: red;"><%=errMsg%></h2>
+						<%} %>
+						
+						<%if(msg!=null && !msg.isEmpty()){ %>
+							<h2 style="color: green;"><%=msg%></h2>
+						<%} %>
+						
 					<br>
 					<br>
 					<p style="color: mintcream;">
 						you don't have an account Please Register? <span><a
-							href="./consumer/consumerSignin">SignUp</a></span>
+							href="../consumer/consumerSigninPage">SignUp</a></span>
 					</p>
 				</form>
 			</div>

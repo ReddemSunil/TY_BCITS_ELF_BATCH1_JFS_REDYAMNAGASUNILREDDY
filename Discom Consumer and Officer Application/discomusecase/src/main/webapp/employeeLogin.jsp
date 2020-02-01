@@ -12,12 +12,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-</head>
+
 <style type="text/css">
     <%@include file="./Bootstrap/bootstrap-4.4.1-dist/css/bootstrap.min.css" %>
     
 </style>
 <link rel="stylesheet" href="${css}/employeelogin.css">
+</head>
+
 
 <body class="backgroundimg">
 	<div class="container">
@@ -25,16 +27,16 @@
 			<div class="mx-auto d-block lineborder ">
 				<br>
 				<h1 style="color: rgb(255, 233, 105);">Employee Login Page</h1>
-				<form name="myform">
+				<form name="myform" method="post" action="../employee/employeeLogin">
 					<div class="form-group">
 						<label for="" class="color" id="empId" name="empId">EmpID</label>
-						<input type="email" class="form-control" id="empId" required>
+						<input type="number" class="form-control" id="empId" required name="empId">
 
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1" class="color" id="password"
 							name="name">Password</label> <input type="password"
-							class="form-control" id="exampleInputPassword1" required>
+							class="form-control" id="exampleInputPassword1" required name="password">
 
 					</div>
 					<div class="form-group form-check">
@@ -43,7 +45,7 @@
 							style="color: darkmagenta;">Check me out</label>
 					</div>
 					<button class="mx-auto d-block" style="background-color: green;"
-						type="submit" formaction="./Home.html">Login</button>
+						type="submit" formaction="">Login</button>
 				</form>
 
 			</div>

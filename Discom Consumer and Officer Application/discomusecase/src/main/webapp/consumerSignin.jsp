@@ -25,8 +25,7 @@
 
 <body class="body">
 	<div class="container">
-
-		<form method="post" action="">
+		<form  action="./consumerSignin" method="post">
 			<br>
 			<h1 style="text-align: center;" class="text-warning">Discom
 				Consumer Sign In Page</h1>
@@ -114,8 +113,10 @@
 			<br>
 			<!-- <a href="/frontend/html/Home.html"> <input class="mx-auto d-block bg-warning" type="button" value="SignIn"></a> -->
 			<button class="mx-auto d-block bg-warning" type="submit"
-				formaction="">SignIn</button>
+				>SignIn</button>
+		</form>
 	</div>
+
 	<%
 		if (errMsg != null && !errMsg.isEmpty()) {
 	%>

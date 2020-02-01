@@ -4,5 +4,6 @@ import com.bcits.discomusecase.bean.ConsumerInfo;
 
 public interface ConsumerServiceDAO {
 	
-	public boolean signinConumer(ConsumerInfo consumerInfo,String cPassword);
+	public ConsumerInfo authenticate(String meterNumber, String password);
+	public boolean signinConumer(ConsumerInfo consumerInfo,String cPassword,String meterNumber);
 }

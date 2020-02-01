@@ -33,12 +33,12 @@
 			<h3 style="text-align: center; color: rgb(18, 80, 143);">Banglore</h3>
 		</div>
 		<div class="col-2">
-			<a href="./consumer/consumerLogin"><button type="submit"
+			<a href="./consumer/consumerLoginPage"><button type="submit"
 					class="button">Consumer logIn</button></a>
 		</div>
 
 		<div class="col-2">
-			<a href="./employee/employeeLogin"><button type="submit"
+			<a href="./employee/employeeLoginPage"><button type="submit"
 					class="button">Employee logIn</button></a>
 		</div>
 	</div>

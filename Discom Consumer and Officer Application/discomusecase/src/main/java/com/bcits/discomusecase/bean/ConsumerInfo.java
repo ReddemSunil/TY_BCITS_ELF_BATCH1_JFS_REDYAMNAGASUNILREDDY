@@ -11,24 +11,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="consumer_info")
-public class ConsumerInfo implements Serializable{
+@Table(name = "consumer_info")
+public class ConsumerInfo implements Serializable {
 	@Id
-	@Column
+	@Column(name = "meter_number")
 	private String meterNumber;
 	@Column
 	private String password;
-	@Column
+	@Column(name = "first_name")
 	private String firstName;
-	@Column
+	@Column(name = "last_name")
 	private String lastName;
-	@Column
+	@Column(name = "contact_number")
 	private Long contactNumber;
 	@Column
 	private String mail;
 	@Column
 	private String region;
-	@Column
+	@Column(name = "type_of_consumer")
 	private String typeOfConsumer;
 	@Column
 	private String address1;
@@ -36,7 +36,5 @@ public class ConsumerInfo implements Serializable{
 	private String address2;
 	@Column
 	private Integer pincode;
-	
-	
-	
-}
+
+}// End of class

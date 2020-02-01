@@ -1,14 +1,15 @@
-.backgroundimg{
+.backgroundimg{ 
     background-image: url(../images/meter.webp);
     background-size: cover;
     background-repeat: no-repeat;
-    
+
 }
 .color{
     color: cyan;
     font-size: medium;
 }
 .lineborder{
+    margin-top: 50px;
     border: 1px solid rebeccapurple;
     background-image: url(../images/power-poles-503935_1920.jpg);
     background-size: cover;
@@ -19,5 +20,5 @@
     padding: 24px;
 }
 a{
-    color:gold;
+	color: cyan;
 }

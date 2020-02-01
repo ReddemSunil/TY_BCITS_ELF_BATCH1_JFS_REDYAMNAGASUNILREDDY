@@ -1,5 +1,23 @@
-.home{
-border: 1px solid thistle;
-width: 50%;
-height: 50px;
+.head{
+	background-color:  lightskyblue;
+}
+.image{
+	background-image: url(../images/light-bulb-1407610_1280.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+
+
+}
+.borderbody{
+	border: 1px solid tomato;
+	width: 50%;
+	height: auto;
+	border-radius: 20px;
+}
+.td{
+	color: magenta;
+	
+}
+.td1{
+	color: rgb(238, 232, 170);
 }
