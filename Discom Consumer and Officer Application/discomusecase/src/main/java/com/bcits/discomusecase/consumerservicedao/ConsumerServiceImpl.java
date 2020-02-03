@@ -3,6 +3,7 @@ package com.bcits.discomusecase.consumerservicedao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.consumerException.ConsumerException;
 import com.bcits.discomusecase.consumerdao.ConsumerDAO;
@@ -36,5 +37,19 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 		}
 		return dao.signinConumer(consumerInfo);
 	}// End of signinConsumer()
+
+	@Override
+	public boolean updateConsumerProfile(ConsumerInfo consumerInfo, String cPassword) {
+		if ( !consumerInfo.getPassword().equals(cPassword)) {
+			throw new ConsumerException("Password and ConfirmPassword Not Matched try Again!!");
+		}
+		return dao.updateConsumerProfile(consumerInfo);
+	}//End of updateConsumerProfile()
+
+	@Override
+	public ConsumerCurrentBill findBillDetailes(String rrNumber) {
+
+		return dao.findBillDetailes(rrNumber);
+	}//End of findBillDetailes()
 
 }// End of class

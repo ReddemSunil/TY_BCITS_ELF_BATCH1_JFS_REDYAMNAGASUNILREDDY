@@ -1,6 +1,7 @@
 <%@page import="com.bcits.discomusecase.bean.ConsumerInfo"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<jsp:include page="header.jsp"></jsp:include>
     <%ConsumerInfo info=(ConsumerInfo)request.getAttribute("consumerInfo"); %>
 <!DOCTYPE html>
 <html>
@@ -8,11 +9,11 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color:lime;">
 	<form action="" method="get">
 		<fieldset>
-			<legend style="color: green;">Your Profile</legend>
-			<table>
+			<legend style="color: navy;">Your Profile</legend>
+			<table style="font-size: 20px">
 				<tr>
 					<td>RR Number</td>
 					<td> : </td>

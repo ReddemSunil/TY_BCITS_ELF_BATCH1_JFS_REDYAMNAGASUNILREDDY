@@ -8,6 +8,7 @@ import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
 
+import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 
 @Repository
@@ -50,5 +51,39 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 
 		return false;
 	}// End of signinConsumer()
+
+	@Override
+	public boolean updateConsumerProfile(ConsumerInfo consumerInfo) {
+		if (consumerInfo != null) {
+			EntityManager manager = factory.createEntityManager();
+
+			EntityTransaction transaction = manager.getTransaction();
+			ConsumerInfo consumerInfo2 = manager.find(ConsumerInfo.class, consumerInfo.getRrNumber());
+			transaction.begin();
+			if (consumerInfo.getContactNumber() != null
+					&& !consumerInfo.getContactNumber().equals(consumerInfo2.getContactNumber())) {
+				consumerInfo2.setContactNumber(consumerInfo.getContactNumber());
+			}
+			if (!consumerInfo.getMail().isEmpty() && consumerInfo.getMail() != null
+					&& !consumerInfo.getMail().equals(consumerInfo2.getMail())) {
+				consumerInfo2.setMail(consumerInfo.getMail());
+			}
+			if (!consumerInfo.getPassword().isEmpty() && consumerInfo.getPassword() != null
+					&& !consumerInfo.getPassword().equals(consumerInfo2.getPassword())) {
+				consumerInfo2.setPassword(consumerInfo.getPassword());
+			}
+			transaction.commit();
+			return true;
+		}
+		return false;
+	}// End of updateConsumerProfile()
+
+	@Override
+	public ConsumerCurrentBill findBillDetailes(String rrNumber) {
+		EntityManager manager = factory.createEntityManager();
+		ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class, rrNumber);
+
+		return consumerCurrentBill;
+	}// End of findBillDetailes()
 
 }// End of repository

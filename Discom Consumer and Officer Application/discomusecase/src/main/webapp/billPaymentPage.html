@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../webapp/css/billPaymentPage.css">
+    
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <div class="border" style="margin-left: 32%;margin-top: 4%;">
+        <h3 style="text-align: center;color:purple;font-size:xx-large;">Payment Details</h3>
+            <div class='row'>
+                <div class=''>
+                   
+                  <form >
+                     
+                    <div class='form-row'>
+                      <div class='col-xs-12 form-group '>
+                        <label class='control-label lable1'>Name on Card</label>
+                        <input class='form-control' size='50' type='text'required>
+                      </div>
+                    </div>
+                    <div class='form-row'>
+                      <div class='col-xs-12 form-group card required'>
+                        <label class='control-label lable1'>Card Number</label>
+                        <input autocomplete='off' class='form-control card-number' size='50' type='text'required>
+                      </div>
+                    </div>
+                    <div class='form-row'>
+                      <div class='col-xs-4 form-group cvc required'>
+                        <label class='control-label lable1'>CVC</label>
+                        <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'required>
+                      </div>
+                      <div class='col-xs-4 form-group expiration required'>
+                        <label class='control-label lable1'>Expiration</label>
+                        <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'required>
+                      </div>
+                      <div class='col-xs-4 form-group expiration required'>
+                        <label class='control-label'> </label>
+                        <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'required>
+                      </div>
+                    </div>
+                    <div class='form-row'>
+                      <div class='col-md-12 form-group'>
+                        <button class='form-control  btn-primary' type='submit'>Pay »</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class='col-md-4'></div>
+            </div>
+        </div>
+    <script src="../webapp/Bootstrap/bootstap jquery/jquery-3.4.1.js"></script>
+    <script src="../webapp/Bootstrap/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
