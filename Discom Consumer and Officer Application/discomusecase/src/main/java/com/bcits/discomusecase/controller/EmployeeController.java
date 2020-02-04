@@ -1,5 +1,7 @@
 package com.bcits.discomusecase.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,13 +27,22 @@ public class EmployeeController {
 		return "employeeLogin";
 	}// End of getEmployeeLogin()
 
-	@PostMapping("/employeeLogin")
+	@PostMapping("/employeeLoginPage")
 	public String employeeLogin(int empId, String password, ModelMap modelMap, HttpServletRequest req) {
 		EmployeeInfo employeeInfo = service.authenticate(empId, password);
 		if (employeeInfo != null) {
 			// Valid Session
 			HttpSession session = req.getSession(true);
 			session.setAttribute("valid", employeeInfo);
+			modelMap.addAttribute("employee", employeeInfo);
+			
+			List<String> list=(List<String>)service.displayHome(employeeInfo.getRegion());
+			if (list!=null&&!list.isEmpty()) {
+				modelMap.addAttribute("list", list);
+				
+			}else {
+				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
+			}
 			return "employeeHome";
 		} else {
 			// Invalid Session
@@ -40,4 +51,47 @@ public class EmployeeController {
 		}
 
 	}// End of employeeLogin()
+	
+	
+	@GetMapping("/employeHome")
+	public String employeeHome(HttpSession session,ModelMap modelMap) {
+		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
+		if(employeeInfo!=null) {
+			//Valid details
+			List<String> list=(List<String>)service.displayHome(employeeInfo.getRegion());
+			if (list!=null&&!list.isEmpty()) {
+				modelMap.addAttribute("list", list);
+				modelMap.addAttribute("employee", employeeInfo);
+				
+			}else {
+				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
+			}
+			return "employeeHome";
+		}else {
+			//Invalid details
+			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
+			return "employeeLogin";
+		}
+	}//End of employeeHome()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }// End of EmployeeController

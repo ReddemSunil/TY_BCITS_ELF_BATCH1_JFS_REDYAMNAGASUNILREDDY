@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%String errMsg=(String)request.getAttribute("errMsg"); %>
 <jsp:include page="header.jsp"/>
 <!DOCTYPE html>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -17,13 +18,13 @@
 
 <link rel="stylesheet" href="${css}/billPaymentPage.css">
 </head>
-<body>
+<body class="body">
     <div class="border" style="margin-left: 32%;margin-top: 4%;">
         <h3 style="text-align: center;color:purple;font-size:xx-large;">Payment Details</h3>
             <div class='row'>
                 <div class=''>
                    
-                  <form >
+                  <form method="post" action="./paymentSuccessfullPage" >
                      
                     <div class='form-row'>
                       <div class='col-xs-12 form-group '>
@@ -35,6 +36,12 @@
                       <div class='col-xs-12 form-group required'>
                         <label class='control-label lable1'>Card Number</label>
                         <input class='form-control card-number' size='50' type='text'required>
+                      </div>
+                    </div>
+                    <div class='form-row'>
+                      <div class='col-xs-12 form-group required'>
+                        <label class='control-label lable1'>Amount</label>
+                        <input class='form-control' size='50' type='text'required name="amountPaid">
                       </div>
                     </div>
                     <div class='form-row'>
@@ -61,6 +68,9 @@
                 <div class='col-md-4'></div>
             </div>
         </div>
+        <%if(errMsg!=null && !errMsg.isEmpty()) {%>
+        	<h4 style="color: red;"><%=errMsg %></h4>
+        <%} %>
 <script src="${js}/jquery-3.4.1.js"></script>
 <script src="${js}/bootstrap.min.js"></script>
 </body>

@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    pageEncoding="ISO-8859-1"%>
+ <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 <style type="text/css">
     <%@include file="./Bootstrap/bootstrap-4.4.1-dist/css/bootstrap.min.css" %>
-    .head{
-	background-color:activeborder;
-}
+    
 </style>
 <link rel="stylesheet" href="${css}/dropdown.css">
 </head>
@@ -32,24 +28,27 @@
 						<label>Profile</label>
 						<div class="dropdown-content">
 
-							<a href="./consumerProfileOpen">Open</a> <a href="./consumerProfileUpdatePage">Update</a>
+							<a href="#">Open</a> 
+							<a href="#">Update</a>
 
 						</div>
 					</div>
 
 				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="../consumer/home">Home<!--  <span class="sr-only">(current)</span> -->
+					href="../employee/employeHome">Home<!--  <span class="sr-only">(current)</span> -->
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="../consumer/billPaymentPage">Payment</a></li>
-				<li class="nav-item"><a class="nav-link" href="../consumer/getBillHistory">History</a></li>
-				<li class="nav-item"><a class="nav-link" href="../consumer/contactUsPage">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="">Search</a></li>
+				<li class="nav-item"><a class="nav-link" href="">Update Bill</a></li>
+				<li class="nav-item"><a class="nav-link" href="">Comments</a></li>
 				<li class="nav-item"><a class="nav-link" href="./logout"><button style="background-color: green;margin-left: 600%">LogOut</button></a></li>
 			</ul>
 		</h3>
 	</div>
 	</nav>
-	<script src="${js}/jquery-3.4.1.js"></script>
-	<script src="${js}/bootstrap.min.js"></script>
+	
+	
+<script src="${js}/jquery-3.4.1.js"></script>
+<script src="${js}/bootstrap.min.js"></script>
 </body>
 </html>

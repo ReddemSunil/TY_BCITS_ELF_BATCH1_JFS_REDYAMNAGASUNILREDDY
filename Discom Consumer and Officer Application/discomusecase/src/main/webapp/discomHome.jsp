@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
@@ -25,7 +26,7 @@
 	<div class="row header">
 		<div class="col-2" style="display: inline;">
 			<img src="${images}/electricity1.png"
-				style="width: 50%; height: 100%;">
+				style="width: 50%; height: 50%;">
 		</div>
 		<div class="col-6">
 			<h1 style="text-align: center; color: rgb(18, 80, 143);">Dicom
@@ -42,10 +43,11 @@
 					class="button">Employee logIn</button></a>
 		</div>
 	</div>
+
 	<div class="row">
 		<marquee behavior="scroll" direction="">
 			<h1 style="color: aqua;">Welcome To Discom Electricity Portal</h1>
-			<img src="${images }/bcits.png" width="50%" alt="">
+			<img src="${images }/bcits.png" width="50%" alt=""height="50%">
 		</marquee>
 	</div>
 

@@ -54,11 +54,11 @@
 						>Login</button>
 						
 						<%if(errMsg!=null && !errMsg.isEmpty()){ %>
-							<h2 style="color: red;"><%=errMsg%></h2>
+							<h4 style="color: red;"><%=errMsg%></h4>
 						<%} %>
 						
 						<%if(msg!=null && !msg.isEmpty()){ %>
-							<h2 style="color: green;"><%=msg%></h2>
+							<h4 style="color: green;"><%=msg%></h4>
 						<%} %>
 						
 					<br>

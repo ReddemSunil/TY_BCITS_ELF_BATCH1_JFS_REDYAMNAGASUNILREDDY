@@ -1,9 +1,11 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.bcits.discomusecase.bean.ConsumerCurrentBill"%>
 <%@page import="com.bcits.discomusecase.bean.ConsumerInfo"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%ConsumerCurrentBill cBill=(ConsumerCurrentBill)request.getAttribute("consumerCurrentBill"); 
 	String errMsg=(String)request.getAttribute("errMsg");
+	SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
 %>
 <jsp:include page="header.jsp"/>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -65,8 +67,10 @@
 						<tr>
 							<td class="td">&nbsp;&nbsp;&nbsp;Readings Taken On</td>
 							<td class="td1">:</td>
-							<%if(cBill!=null){ %>
-							<td class="td2"><%=cBill.getReadingsTakenOn() %></td>
+							<%if(cBill!=null){ 
+								
+							%>
+							<td class="td2"><%=format.format(cBill.getReadingsTakenOn()) %></td>
 							<%} %>
 						</tr>
 						<tr>
@@ -80,7 +84,7 @@
 							<td class="td">&nbsp;&nbsp;&nbsp;Due Date</td>
 							<td class="td1">:</td>
 							<%if(cBill!=null){ %>
-							<td class="td2"><%=cBill.getDueDate() %></td>
+							<td class="td2"><%=format.format(cBill.getDueDate()) %></td>
 							<%} %>
 						</tr>
 					</table><br>

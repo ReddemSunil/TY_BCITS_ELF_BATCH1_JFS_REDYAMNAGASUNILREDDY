@@ -11,3 +11,8 @@
     color: rgb(255, 71, 148);
    font-size: x-large;
 }
+.body{
+	background-image: url("../images/umbrella-2904775_1920.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
