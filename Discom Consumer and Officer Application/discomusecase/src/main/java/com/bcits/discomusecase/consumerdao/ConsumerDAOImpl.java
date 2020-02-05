@@ -98,14 +98,25 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 
 		if (contactUsInfo != null) {
 			EntityTransaction transaction = manager.getTransaction();
-
-			try {
-				transaction.begin();
-				manager.persist(contactUsInfo);
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
+			ContactUsInfo coInfo = manager.find(ContactUsInfo.class, contactUsInfo.getRrNumber());
+			if (coInfo != null) {
+				try {
+					transaction.begin();
+					coInfo.setComments(contactUsInfo.getComments());
+					transaction.commit();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					transaction.begin();
+					manager.persist(contactUsInfo);
+					transaction.commit();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+
 			manager.close();
 			return true;
 		}
@@ -142,8 +153,8 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 					paymentDetails2.setRemainingAmount(paymentDetails.getRemainingAmount());
 					ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class,
 							paymentDetails.getRrNumber());
-					
-					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount()-paymentDetails.getAmountPaid());
+
+					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
 				} else {
 					manager.persist(paymentDetails);
 				}

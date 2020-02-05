@@ -11,7 +11,9 @@
 <title>Insert title here</title>
 <style type="text/css">
     <%@include file="./Bootstrap/bootstrap-4.4.1-dist/css/bootstrap.min.css" %>
-    
+        .head{
+	background-color:activeborder;
+}
 </style>
 <link rel="stylesheet" href="${css}/dropdown.css">
 </head>
@@ -22,26 +24,13 @@
 	<div class="collapse navbar-collapse head" id="navbarNavDropdown">
 		<h3 style="color: blue;">
 			<ul class="navbar-nav">
-				<li class="nav-item nav-link">
-					<div class="dropdown">
-						<!-- <button class="dropbtn">Profile</button> -->
-						<label>Profile</label>
-						<div class="dropdown-content">
-
-							<a href="#">Open</a> 
-							<a href="#">Update</a>
-
-						</div>
-					</div>
-
-				</li>
 				<li class="nav-item"><a class="nav-link"
 					href="../employee/employeHome">Home<!--  <span class="sr-only">(current)</span> -->
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="">Search</a></li>
-				<li class="nav-item"><a class="nav-link" href="">Update Bill</a></li>
-				<li class="nav-item"><a class="nav-link" href="">Comments</a></li>
-				<li class="nav-item"><a class="nav-link" href="./logout"><button style="background-color: green;margin-left: 600%">LogOut</button></a></li>
+				<li class="nav-item"><a class="nav-link" href="../employee/searchPage">Search</a></li>
+				<li class="nav-item"><a class="nav-link" href="../employee/billUpdatePage">UpdateBill</a></li>
+				<li class="nav-item"><a class="nav-link" href="../employee/getComments">Comments</a></li>
+				<li class="nav-item"><a class="nav-link" href="./logout"><button style="background-color: green;margin-left: 700%">LogOut</button></a></li>
 			</ul>
 		</h3>
 	</div>

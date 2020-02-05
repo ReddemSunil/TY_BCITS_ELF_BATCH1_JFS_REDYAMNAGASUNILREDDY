@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%String msg=(String)request.getAttribute("msg");
+ 	String errMsg=(String)request.getAttribute("errMsg");
+ %>
 <jsp:include page="header.jsp"/>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
@@ -55,6 +58,12 @@
 								<button type="submit" class="btn btn-default">Submit</button>
 							</div>
 						</div>
+						<%if(msg!=null&&!msg.isEmpty()){ %>
+							<h4 style="color: green;"><%=msg %></h4>
+						<%} %>
+						<%if(errMsg!=null&&!errMsg.isEmpty()){ %>
+							<h4 style="color: red;"><%=errMsg %></h4>
+						<%} %>
 					</div>
 				</div>
 			</div>

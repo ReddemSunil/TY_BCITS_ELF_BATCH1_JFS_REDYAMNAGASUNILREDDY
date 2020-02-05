@@ -1,12 +1,10 @@
-<%@page import="com.bcits.discomusecase.bean.PaymentDetails"%>
-<%@page import="com.bcits.discomusecase.bean.EmployeeInfo"%>
 <%@page import="java.util.List"%>
+<%@page import="com.bcits.discomusecase.bean.ContactUsInfo"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-  <%String errMsg=(String)request.getAttribute("errMsg");
-  	List<PaymentDetails> list=(List<PaymentDetails>)request.getAttribute("list");
-  	EmployeeInfo employeeInfo=(EmployeeInfo)request.getAttribute("employee");
-  %>
+     <%String errMsg=(String)request.getAttribute("errMsg");
+		List<ContactUsInfo> list=(List<ContactUsInfo>)request.getAttribute("list");
+     %>
  <jsp:include page="employeeHeader.jsp"/>  
  <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
@@ -23,27 +21,23 @@
 </style>
 </head>
 <body style="background-color: lightblue;"><br><br>
-	<h3 style="color: navy;text-align: center;">
-	  Employee Name   : <%=employeeInfo.getName() %><br>
-	  Employee Id     : <%=employeeInfo.getEmpId() %><br>
-	  Employee Region : <%=employeeInfo.getRegion()%><br>
-	
-	</h3><br>
+<h3 style="color:maroon; text-align:center;">Consumer Needs You Help</h3><br>
+
 	<%if(list!=null&&!list.isEmpty()){ %>
 	<h5>
 		<table align="center" style="width: 80%;height: 50%;">
 			<tr style="color:orange;">
 				<th>RR Numbers</th>
-				<th>Bill Amount</th>
-				<th>Amount Paid</th>
-				<th>Remaining Amount</th>
+				<th>Name</th>
+				<th>Mail</th>
+				<th>comments</th>
 			</tr>
-		<%for(PaymentDetails details:list){ %>
-			<tr style="color:lime;">
+		<%for(ContactUsInfo details:list){ %>
+			<tr style="color:navy;">
 				<td><%=details.getRrNumber() %></td>
-				<td><%=details.getAmount() %></td>
-				<td><%=details.getAmountPaid() %></td>
-				<td><%=details.getRemainingAmount() %></td>
+				<td><%=details.getName() %></td>
+				<td><%=details.getMail()%></td>
+				<td><%=details.getComments() %></td>
 		<%} %>
 		</table>
 		</h5>

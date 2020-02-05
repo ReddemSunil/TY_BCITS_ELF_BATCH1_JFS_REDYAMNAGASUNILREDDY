@@ -13,7 +13,7 @@ public class BillCalculating {
 		int consumption=Integer.parseInt(scn.nextLine());
 		System.out.println("enter type of consumer \nresidential consumer or \ncommercial consumer or \nindustries consumer");
 		String typeOfConsumer=scn.nextLine();
-		Double billAmount=BillTariff.claculateBill(consumption, typeOfConsumer);
-		System.out.println("your total bill amount  is "+billAmount+" /-");
+//		Double billAmount=BillTariff.claculateBill(consumption, typeOfConsumer);
+//		System.out.println("your total bill amount  is "+billAmount+" /-");
 	}
 }

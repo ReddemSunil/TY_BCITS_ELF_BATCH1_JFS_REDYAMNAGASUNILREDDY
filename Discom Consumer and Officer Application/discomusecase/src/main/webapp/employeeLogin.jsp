@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%String errMsg=(String)request.getAttribute("errMsg");
+String msg=(String)request.getAttribute("msg");
+%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
@@ -27,7 +30,7 @@
 			<div class="mx-auto d-block lineborder ">
 				<br>
 				<h1 style="color: rgb(255, 233, 105);">Employee Login Page</h1>
-				<form name="myform" method="post" action="../employee/employeeLogin">
+				<form name="myform" method="post" action="../employee/employeeLoginPage">
 					<div class="form-group">
 						<label for="" class="color" id="empId" name="empId">EmpID</label>
 						<input type="number" class="form-control" id="empId" required name="empId">
@@ -45,9 +48,14 @@
 							style="color: darkmagenta;">Check me out</label>
 					</div>
 					<button class="mx-auto d-block" style="background-color: green;"
-						type="submit" formaction="">Login</button>
+						type="submit">Login</button>
 				</form>
-
+				<%if(errMsg!=null&&!errMsg.isEmpty()){ %>
+					<h4 style="color: red;"><%=errMsg %></h4>
+				<%} %>
+				<%if(msg!=null&&!msg.isEmpty()){ %>
+					<h4 style="color: green;"><%=msg %></h4>
+				<%} %>
 			</div>
 		</div>
 	</div>

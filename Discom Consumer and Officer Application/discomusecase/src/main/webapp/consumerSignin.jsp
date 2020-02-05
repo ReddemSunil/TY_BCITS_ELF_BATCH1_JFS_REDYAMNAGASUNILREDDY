@@ -86,9 +86,9 @@
 					<label for="">Type of consumers</label><br> <select
 						name="typeOfConsumer" id="" class="form-control">
 						<option value="Select" selected disabled>Select</option>
-						<option value="Residential consumers">Residential
+						<option value="Residential">Residential
 							consumers</option>
-						<option value="Commercial consumers">Commercial consumers</option>
+						<option value="Commercial">Commercial consumers</option>
 						<option value="Industries">Industries</option>
 					</select>
 				</div>
