@@ -184,9 +184,10 @@ public class EmployeeController {
 		String rrNumber=(String)session.getAttribute("sessionRRNumber");
 		ConsumerInfo consumerInfo=service.getConsumerInfo(rrNumber);
 		if (consumerInfo != null) {
-			session.setAttribute("rrNumber", rrNumber);
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("consumerInfo", consumerInfo);
 		}else {
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
@@ -197,9 +198,10 @@ public class EmployeeController {
 		String rrNumber=(String)session.getAttribute("sessionRRNumber");
 		ConsumerCurrentBill currentBill=service.getConsumerCurrentBill(rrNumber);
 		if (currentBill != null) {
-			session.setAttribute("rrNumber", rrNumber);
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("currentBill", currentBill);
 		}else {
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
@@ -210,9 +212,10 @@ public class EmployeeController {
 		String rrNumber=(String)session.getAttribute("sessionRRNumber");
 		List<MonthlyConsumtion> monthlyConsumtion=service.getMonthlyConsumption(rrNumber);
 		if (monthlyConsumtion != null) {
-			session.setAttribute("rrNumber", rrNumber);
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("monthlyConsumtion", monthlyConsumtion);
 		}else {
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
@@ -223,9 +226,10 @@ public class EmployeeController {
 		String rrNumber=(String)session.getAttribute("sessionRRNumber");
 		PaymentDetails paymentDetails=service.getPaymentDetails(rrNumber);
 		if (paymentDetails != null) {
-			session.setAttribute("rrNumber", rrNumber);
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("paymentDetails", paymentDetails);
 		}else {
+			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";

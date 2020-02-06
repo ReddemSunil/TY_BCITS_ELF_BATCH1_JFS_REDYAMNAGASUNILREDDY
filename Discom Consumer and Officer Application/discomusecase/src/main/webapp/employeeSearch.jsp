@@ -34,10 +34,10 @@
 <body style="background-color: lightblue;"><br>
 	<div class="container">
       <div class="row">
-         <div class="col-md-4 mx-auto">
+         <div class="col-md-4">
             <div class="myform form "><br><br>
                <form action="../employee/displayLinks" method="post">
-               <h3 style="color: navy;text-align: center;">Search Page </h3>
+               <h3 style="color: navy;;">Search Page </h3>
                   <div class="form-group">
                   <label>RR Number</label><br>
                      <input type="text" name="rrNumber"  class="form-control my-input" placeholder="Enter rr number">
@@ -49,9 +49,9 @@
              
                   	<h5>RR Number Is : <%=rrNumber %><br>
                   	Search For<a href="../employee/searchConsumerDetails"> ConsumerDetails </a><br>
-                  		Search For<a href=""> CurrentBillConsumption </a><br>
-                  		Search For<a href=""> MonthlyBillConsumption </a><br>
-                  		Search For<a href=""> PaymentDetails </a><br>
+                  		Search For<a href="../employee/searchConsumerCurrentBillDetails"> CurrentBillConsumption </a><br>
+                  		Search For<a href="../employee/searchMonthlyConsumtionDetails"> MonthlyBillConsumption </a><br>
+                  		Search For<a href="../employee/searchPaymentDetails"> PaymentDetails </a><br>
                   	</h5>
                   <%} %>
                   </form>
@@ -206,7 +206,7 @@
 				<th>Due Date</th>
 			</tr>
 		<%for(MonthlyConsumtion monthlyConsumtion:list){ %>
-			<tr style="color:lime;">
+			<tr>
 				<td><%=monthlyConsumtion.getMoPk().getRrNumber() %></td>
 				<td><%=monthlyConsumtion.getAmount() %></td>
 				<td><%=monthlyConsumtion.getInitialUnits() %></td>
