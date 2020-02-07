@@ -78,9 +78,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 				mConsumtion.setMoPk(mConsumptionPK);
 
-				transaction.begin();
-				manager.persist(mConsumtion);
-				transaction.commit();
+				
 				
 				BillTariff tariff = new BillTariff();
 				Integer unitsConsumed = consumerCurrentBill.getFinalUnits() - initialUnits;
@@ -93,6 +91,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					bill.setInitialUnits(initialUnits);
 					bill.setUnitsConsumed(unitsConsumed);
 					bill.setAmount(amount);
+					transaction.commit();
+					transaction.begin();
+					manager.persist(mConsumtion);
 					transaction.commit();
 				} catch (Exception e) {
 					e.printStackTrace();

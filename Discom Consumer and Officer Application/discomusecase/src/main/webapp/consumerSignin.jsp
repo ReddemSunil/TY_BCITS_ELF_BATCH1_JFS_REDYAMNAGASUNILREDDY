@@ -120,7 +120,7 @@
 	<%
 		if (errMsg != null && !errMsg.isEmpty()) {
 	%>
-	<h2 style="color: red;"><%=errMsg%></h2>
+	<h2 style="color: red;text-align: center;"><%=errMsg%></h2>
 	<%
 		}
 	%>

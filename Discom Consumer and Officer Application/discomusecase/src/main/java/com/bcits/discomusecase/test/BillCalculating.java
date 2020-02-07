@@ -6,7 +6,6 @@ import com.bcits.discomusecase.billtariff.BillTariff;
 
 public class BillCalculating {
 	public static void main(String[] args) {
-		
 		Scanner scn=new Scanner(System.in);
 		System.out.println("enter the power consumption in KWH and type of consumer ");
 		System.out.println("enter the power consumption");

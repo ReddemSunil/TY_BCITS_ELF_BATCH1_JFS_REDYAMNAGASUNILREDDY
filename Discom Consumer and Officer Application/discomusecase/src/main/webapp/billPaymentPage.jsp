@@ -69,7 +69,7 @@
             </div>
         </div>
         <%if(errMsg!=null && !errMsg.isEmpty()) {%>
-        	<h4 style="color: red;"><%=errMsg %></h4>
+        	<h3 style="color: red;text-align: center;"><%=errMsg %></h3>
         <%} %>
 <script src="${js}/jquery-3.4.1.js"></script>
 <script src="${js}/bootstrap.min.js"></script>

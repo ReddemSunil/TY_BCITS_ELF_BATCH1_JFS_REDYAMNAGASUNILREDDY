@@ -1,5 +1,5 @@
 .backgroundimg{ 
-    background-image: url(../images/meter.webp);
+    background-image: url(../images/lot.png);
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -11,10 +11,10 @@
 .lineborder{
     margin-top: 50px;
     border: 1px solid rebeccapurple;
-    background-image: url(../images/power-poles-503935_1920.jpg);
+    background-image: url(../images/light-bulbs-1875268_1920.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    
+    border-radius:30px;
     width: 444px;
     height: 460px;
     padding: 24px;

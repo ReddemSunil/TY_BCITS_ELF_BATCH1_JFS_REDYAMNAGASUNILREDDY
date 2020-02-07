@@ -11,7 +11,9 @@ import com.bcits.discomusecase.bean.ContactUsInfo;
 import com.bcits.discomusecase.bean.EmployeeInfo;
 import com.bcits.discomusecase.bean.MonthlyConsumtion;
 import com.bcits.discomusecase.bean.PaymentDetails;
-import com.bcits.discomusecase.consumerException.ConsumerException;
+import com.bcits.discomusecase.consumerException.BillUpdatePageException;
+import com.bcits.discomusecase.consumerException.ConsumerSigninException;
+import com.bcits.discomusecase.consumerException.EmployeeLoginException;
 import com.bcits.discomusecase.employeedao.EmployeeDAO;
 
 @Service
@@ -22,7 +24,10 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 	@Override
 	public EmployeeInfo authenticate(int empId, String password) {
 		if (empId < 1) {
-			throw new ConsumerException("Employee Id Not Contains Negative Values");
+			throw new EmployeeLoginException("Employee Id Not Contains Negative Values");
+		}
+		if (password.trim().length()<5) {
+			throw new EmployeeLoginException("Please Enter Proper Password Length!!");
 		}
 		return dao.authenticate(empId, password);
 	}// End of authenticate()
@@ -34,6 +39,10 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 
 	@Override
 	public boolean billUpdate(ConsumerCurrentBill consumerCurrentBill) {
+		ConsumerCurrentBill consumerCurrentBill2=dao.getConsumerCurrentBill(consumerCurrentBill.getRrNumber());
+		if (consumerCurrentBill.getFinalUnits()<consumerCurrentBill2.getFinalUnits()) {
+			throw new BillUpdatePageException("Final value readings are less compare to previeous readings please check once!!");
+		}
 		return dao.billUpdate(consumerCurrentBill);
 	}//End of billUpdate()
 
@@ -44,6 +53,7 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 
 	@Override
 	public ConsumerInfo getConsumerInfo(String rrNumber) {
+		
 		return dao.getConsumerInfo(rrNumber);
 	}//End of getConsumerInfo()
 

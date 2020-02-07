@@ -21,10 +21,31 @@ String msg=(String)request.getAttribute("msg");
     
 </style>
 <link rel="stylesheet" href="${css}/employeelogin.css">
+<link rel="stylesheet" href="${css}/Discomhome.css">
 </head>
 
 
 <body class="backgroundimg">
+<div class="row header">
+		<div class="col-2" style="display: inline;">
+			<img src="${images}/electricity1.png"
+				style="width: 50%; height:100%;">
+		</div>
+		<div class="col-6">
+			<h1 style="text-align: center; color: rgb(18, 80, 143);">Discom
+				Electricity portal</h1>
+			<h3 style="text-align: center; color: rgb(18, 80, 143);">Banglore</h3>
+		</div>
+		<div class="col-2">
+			<a href="../consumer/consumerLoginPage"><button type="submit"
+					class="button">Consumer logIn</button></a>
+		</div>
+
+		<div class="col-2">
+			<a href="../employee/employeeLoginPage"><button type="submit"
+					class="button">Employee logIn</button></a>
+		</div>
+	</div>
 	<div class="container">
 		<div class="row ">
 			<div class="mx-auto d-block lineborder ">

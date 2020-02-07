@@ -20,8 +20,29 @@
     
 </style>
 <link rel="stylesheet" href="${css}/consumerlogin.css">
+<link rel="stylesheet" href="${css}/Discomhome.css">
 </head>
 <body class="backgroundimg">
+<div class="row header">
+		<div class="col-2" style="display: inline;">
+			<img src="${images}/electricity1.png"
+				style="width: 50%; height:100%;">
+		</div>
+		<div class="col-6">
+			<h1 style="text-align: center; color: rgb(18, 80, 143);">Discom
+				Electricity portal</h1>
+			<h3 style="text-align: center; color: rgb(18, 80, 143);">Banglore</h3>
+		</div>
+		<div class="col-2">
+			<a href="../consumer/consumerLoginPage"><button type="submit"
+					class="button">Consumer logIn</button></a>
+		</div>
+
+		<div class="col-2">
+			<a href="../employee/employeeLoginPage"><button type="submit"
+					class="button">Employee logIn</button></a>
+		</div>
+	</div>
 	<div class="container">
 		<div class="row mx-auto d-block">
 			<div>
@@ -42,7 +63,7 @@
 						<label for="exampleInputPassword1" class="color" id="password"
 							name="name">Password</label> 
 							<input type="password"
-							class="form-control" id="exampleInputPassword1" required name="password">
+							class="form-control" id="password" required name="password">
 
 					</div>
 					<div class="form-group form-check">
