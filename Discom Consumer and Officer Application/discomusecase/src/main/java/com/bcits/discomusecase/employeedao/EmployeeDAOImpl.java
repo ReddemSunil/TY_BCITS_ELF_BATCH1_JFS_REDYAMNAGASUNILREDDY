@@ -8,6 +8,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import com.bcits.discomusecase.bean.ConsumerCurrentBill;
@@ -18,6 +20,7 @@ import com.bcits.discomusecase.bean.MonthlyConsumptionPK;
 import com.bcits.discomusecase.bean.MonthlyConsumtion;
 import com.bcits.discomusecase.bean.PaymentDetails;
 import com.bcits.discomusecase.billtariff.BillTariff;
+import com.bcits.discomusecase.mail.MailMail;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -54,18 +57,18 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public boolean billUpdate(ConsumerCurrentBill consumerCurrentBill) {
-		Integer initialUnits=0;
-		Double preAmount=0.0;
-		
+		Integer initialUnits = 0;
+		Double preAmount = 0.0;
+
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		ConsumerCurrentBill bill = manager.find(ConsumerCurrentBill.class, consumerCurrentBill.getRrNumber());
 		ConsumerInfo info = manager.find(ConsumerInfo.class, consumerCurrentBill.getRrNumber());
 		if (info != null) {
-			if (bill!=null) {
+			if (bill != null) {
 				initialUnits = bill.getFinalUnits();
-				preAmount=bill.getAmount();
-				
+				preAmount = bill.getAmount();
+
 				MonthlyConsumtion mConsumtion = new MonthlyConsumtion();
 				mConsumtion.setAmount(bill.getAmount());
 				mConsumtion.setDueDate(bill.getDueDate());
@@ -78,11 +81,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 				mConsumtion.setMoPk(mConsumptionPK);
 
-				
-				
 				BillTariff tariff = new BillTariff();
 				Integer unitsConsumed = consumerCurrentBill.getFinalUnits() - initialUnits;
-				Double amount = preAmount+ (tariff.claculateBill(unitsConsumed, info.getTypeOfConsumer()));
+				Double amount = preAmount + (tariff.claculateBill(unitsConsumed, info.getTypeOfConsumer()));
 				try {
 					transaction.begin();
 					bill.setReadingsTakenOn(consumerCurrentBill.getReadingsTakenOn());
@@ -92,16 +93,29 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					bill.setUnitsConsumed(unitsConsumed);
 					bill.setAmount(amount);
 					transaction.commit();
+
 					transaction.begin();
 					manager.persist(mConsumtion);
 					transaction.commit();
+
+					ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
+					double cAmount = amount-mConsumtion.getAmount();
+					MailMail mm = (MailMail) context.getBean("mailMail");
+					mm.sendMail("rnsunil.software@gmail.com", info.getMail(), "Current Bill",
+							(" rrNumber = " + bill.getRrNumber() + "\n contact Number = " + info.getContactNumber()
+									+ "\n Consumed Units = " + bill.getUnitsConsumed() + "\n Final Units = "
+									+ bill.getFinalUnits() + "\n Initial Units = " + bill.getInitialUnits()
+									+ "\n Due Date = " + bill.getDueDate() + "\n Readings Taken On = "
+									+ bill.getReadingsTakenOn() + "\n Due Amount = " + mConsumtion.getAmount()
+									+ "\n current bill = " + cAmount + "\n Total Bill = " + bill.getAmount()));
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}else {
+			} else {
 				BillTariff tariff = new BillTariff();
 				Integer unitsConsumed = consumerCurrentBill.getFinalUnits() - initialUnits;
-				Double amount = preAmount+ (tariff.claculateBill(unitsConsumed, info.getTypeOfConsumer()));
+				Double amount = preAmount + (tariff.claculateBill(unitsConsumed, info.getTypeOfConsumer()));
 				try {
 					transaction.begin();
 					consumerCurrentBill.setInitialUnits(initialUnits);
@@ -109,10 +123,26 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					consumerCurrentBill.setAmount(amount);
 					manager.persist(consumerCurrentBill);
 					transaction.commit();
+					
+					
+					ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
+					double cAmount = consumerCurrentBill.getAmount();
+					MailMail mm = (MailMail) context.getBean("mailMail");
+					mm.sendMail("rnsunil.software@gmail.com", info.getMail(), "Current Bill",
+							(" rrNumber = " + consumerCurrentBill.getRrNumber() + "\n contact Number = "
+									+ info.getContactNumber() + "\n Consumed Units = "
+									+ consumerCurrentBill.getUnitsConsumed() + "\n Final Units = "
+									+ consumerCurrentBill.getFinalUnits() + "\n Initial Units = "
+									+ consumerCurrentBill.getInitialUnits() + "\n Due Date = "
+									+ consumerCurrentBill.getDueDate() + "\n Readings Taken On = "
+									+ consumerCurrentBill.getReadingsTakenOn() + "\n Due Amount = " + 0
+									+ "\n current bill = " + cAmount + "\n Total Bill = " + cAmount));
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 			manager.close();
 			return true;
@@ -131,31 +161,31 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		} else {
 			return null;
 		}
-	}//End of getComments()
+	}// End of getComments()
 
 	@Override
 	public ConsumerInfo getConsumerInfo(String rrNumber) {
 		EntityManager manager = factory.createEntityManager();
 		ConsumerInfo consumerInfo = manager.find(ConsumerInfo.class, rrNumber);
-		if (consumerInfo != null ) {
+		if (consumerInfo != null) {
 			return consumerInfo;
 		} else {
 
 			return null;
 		}
-	}//End of getConsumerInfo()
+	}// End of getConsumerInfo()
 
 	@Override
 	public ConsumerCurrentBill getConsumerCurrentBill(String rrNumber) {
 		EntityManager manager = factory.createEntityManager();
 		ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class, rrNumber);
-		if (consumerCurrentBill != null ) {
+		if (consumerCurrentBill != null) {
 			return consumerCurrentBill;
 		} else {
 
 			return null;
 		}
-	}//End of getConsumerCurrentBill()
+	}// End of getConsumerCurrentBill()
 
 	@Override
 	public List<MonthlyConsumtion> getMonthlyConsumption(String rrNumber) {
@@ -169,18 +199,18 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		} else {
 			return null;
 		}
-	}//End of getMonthlyConsumption()
+	}// End of getMonthlyConsumption()
 
 	@Override
 	public PaymentDetails getPaymentDetails(String rrNumber) {
 		EntityManager manager = factory.createEntityManager();
 		PaymentDetails paymentDetails = manager.find(PaymentDetails.class, rrNumber);
-		if (paymentDetails != null ) {
+		if (paymentDetails != null) {
 			return paymentDetails;
 		} else {
 
 			return null;
 		}
-	}//End of getPaymentDetails()
+	}// End of getPaymentDetails()
 
 }// End of class

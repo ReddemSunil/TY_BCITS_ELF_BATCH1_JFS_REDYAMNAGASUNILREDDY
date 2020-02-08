@@ -40,8 +40,11 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 	@Override
 	public boolean billUpdate(ConsumerCurrentBill consumerCurrentBill) {
 		ConsumerCurrentBill consumerCurrentBill2=dao.getConsumerCurrentBill(consumerCurrentBill.getRrNumber());
-		if (consumerCurrentBill.getFinalUnits()<consumerCurrentBill2.getFinalUnits()) {
-			throw new BillUpdatePageException("Final value readings are less compare to previeous readings please check once!!");
+		if (consumerCurrentBill2!=null) {
+			
+			if (consumerCurrentBill.getFinalUnits()<consumerCurrentBill2.getFinalUnits()) {
+				throw new BillUpdatePageException("Final value readings are less compare to previeous readings please check once!!");
+			}
 		}
 		return dao.billUpdate(consumerCurrentBill);
 	}//End of billUpdate()

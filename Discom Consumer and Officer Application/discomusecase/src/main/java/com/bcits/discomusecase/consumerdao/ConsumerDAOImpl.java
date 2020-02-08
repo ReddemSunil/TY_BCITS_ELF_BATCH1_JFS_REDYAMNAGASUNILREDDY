@@ -156,6 +156,10 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 
 					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
 				} else {
+					ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class,
+							paymentDetails.getRrNumber());
+
+					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
 					manager.persist(paymentDetails);
 				}
 
@@ -169,5 +173,6 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 
 		return false;
 	}// End of payment()
+	
 
 }// End of repository

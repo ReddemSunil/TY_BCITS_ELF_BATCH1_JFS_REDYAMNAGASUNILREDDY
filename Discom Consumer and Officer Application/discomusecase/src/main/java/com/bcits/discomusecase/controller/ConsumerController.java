@@ -71,7 +71,12 @@ public class ConsumerController {
 		if (consumerInfo != null) {
 			// Valid Session
 			ConsumerCurrentBill consumerCurrentBill = service.findBillDetailes(consumerInfo.getRrNumber());
-			req.setAttribute("consumerCurrentBill", consumerCurrentBill);
+			if (consumerCurrentBill != null) {
+
+				req.setAttribute("consumerCurrentBill", consumerCurrentBill);
+			} else {
+				req.setAttribute("errMsg", "Details Not Found");
+			}
 			return "consumerHome";
 		} else {
 			// Invalid Session
@@ -145,9 +150,19 @@ public class ConsumerController {
 
 	@GetMapping("/billPaymentPage")
 	public String billPaymentPage(HttpSession session, ModelMap modelMap) {
-		if (session.getAttribute("validation") != null) {
+		ConsumerInfo consumerInfo = (ConsumerInfo) session.getAttribute("validation");
+		if (consumerInfo != null) {
 			// Valid Session
-			return "billPaymentPage";
+			
+				ConsumerCurrentBill bill=service.findBillDetailes(consumerInfo.getRrNumber());
+				if (bill==null) {
+					modelMap.addAttribute("errMsg", "You are a new user as of now your bill not yet generated!!");
+					return "consumerHome";
+				}else {
+					
+					return "billPaymentPage";
+				}
+				
 		} else {
 			// Invalid Session
 			modelMap.addAttribute("errMsg", "Please Login First");
@@ -230,7 +245,7 @@ public class ConsumerController {
 				modelMap.addAttribute("list", list);
 				modelMap.addAttribute("rrNumber", consumerInfo.getRrNumber());
 			}else {
-				modelMap.addAttribute("errMsg", "Details Not Found");
+				modelMap.addAttribute("errMsg", "You don't have bill history!!");
 			}
 			return "billHistory";
 		} else {
