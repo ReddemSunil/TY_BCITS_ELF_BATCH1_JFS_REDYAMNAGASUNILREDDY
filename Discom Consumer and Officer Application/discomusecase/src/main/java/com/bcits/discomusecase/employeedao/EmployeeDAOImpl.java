@@ -99,7 +99,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					transaction.commit();
 
 					ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
-					double cAmount = amount-mConsumtion.getAmount();
+					double cAmount = amount - mConsumtion.getAmount();
 					MailMail mm = (MailMail) context.getBean("mailMail");
 					mm.sendMail("rnsunil.software@gmail.com", info.getMail(), "Current Bill",
 							(" rrNumber = " + bill.getRrNumber() + "\n contact Number = " + info.getContactNumber()
@@ -123,8 +123,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					consumerCurrentBill.setAmount(amount);
 					manager.persist(consumerCurrentBill);
 					transaction.commit();
-					
-					
+
 					ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
 					double cAmount = consumerCurrentBill.getAmount();
 					MailMail mm = (MailMail) context.getBean("mailMail");
@@ -137,8 +136,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 									+ consumerCurrentBill.getDueDate() + "\n Readings Taken On = "
 									+ consumerCurrentBill.getReadingsTakenOn() + "\n Due Amount = " + 0
 									+ "\n current bill = " + cAmount + "\n Total Bill = " + cAmount));
-					
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -212,5 +210,33 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return null;
 		}
 	}// End of getPaymentDetails()
+
+	@Override
+	public List<ConsumerInfo> getAllConsumerDetails(String region) {
+		EntityManager manager = factory.createEntityManager();
+		String jpql = "from ConsumerInfo  where region = :region";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("region", region);
+		List<ConsumerInfo> list = query.getResultList();
+		if (list != null && !list.isEmpty()) {
+			return list;
+		} else {
+			return null;
+		}
+	}// End of getAllConsumerDetails()
+
+	@Override
+	public List<ConsumerCurrentBill> getAllConsumerCurrentBills(String region) {
+		EntityManager manager = factory.createEntityManager();
+		String jpql = "from com.bcits.discomusecase.bean.ConsumerCurrentBill where rrNumber in(select rrNumber from com.bcits.discomusecase.bean.ConsumerInfo where region=:region)";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("region", region);
+		List<ConsumerCurrentBill> list = query.getResultList();
+		if (list != null && !list.isEmpty()) {
+			return list;
+		} else {
+			return null;
+		}
+	}// End of getAllConsumerCurrentBills()
 
 }// End of class

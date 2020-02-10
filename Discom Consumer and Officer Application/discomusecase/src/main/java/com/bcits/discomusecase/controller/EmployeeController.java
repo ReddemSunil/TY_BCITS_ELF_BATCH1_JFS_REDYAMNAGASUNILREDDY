@@ -1,10 +1,12 @@
 package com.bcits.discomusecase.controller;
 
+import java.nio.channels.SeekableByteChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebParam.Mode;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,12 +34,12 @@ import com.bcits.discomusecase.employeedservice.EmployeeServiceDAO;
 public class EmployeeController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		CustomDateEditor dateEditor=new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+		CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
 		binder.registerCustomEditor(Date.class, dateEditor);
 	}
+
 	@Autowired
 	private EmployeeServiceDAO service;
-	
 
 	@GetMapping("/employeeLoginPage")
 	public String getEmployeeLogin() {
@@ -52,12 +54,12 @@ public class EmployeeController {
 			HttpSession session = req.getSession(true);
 			session.setAttribute("valid", employeeInfo);
 			modelMap.addAttribute("employee", employeeInfo);
-			
-			List<PaymentDetails> list=service.displayHome(employeeInfo.getRegion());
-			if (list!=null&&!list.isEmpty()) {
+
+			List<PaymentDetails> list = service.displayHome(employeeInfo.getRegion());
+			if (list != null && !list.isEmpty()) {
 				modelMap.addAttribute("list", list);
-				
-			}else {
+
+			} else {
 				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
 			}
 			return "employeeHome";
@@ -68,172 +70,208 @@ public class EmployeeController {
 		}
 
 	}// End of employeeLogin()
-	
-	
+
 	@GetMapping("/employeHome")
-	public String employeeHome(HttpSession session,ModelMap modelMap) {
-		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
-		if(employeeInfo!=null) {
-			//Valid details
-			List<PaymentDetails> list=service.displayHome(employeeInfo.getRegion());
-			if (list!=null&&!list.isEmpty()) {
+	public String employeeHome(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid details
+			List<PaymentDetails> list = service.displayHome(employeeInfo.getRegion());
+			if (list != null && !list.isEmpty()) {
 				modelMap.addAttribute("list", list);
 				modelMap.addAttribute("employee", employeeInfo);
-				
-			}else {
+
+			} else {
 				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
 			}
 			return "employeeHome";
-		}else {
-			//Invalid details
+		} else {
+			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
 			return "employeeLogin";
 		}
-	}//End of employeeHome()
-	
-	
+	}// End of employeeHome()
+
 	@GetMapping("/billUpdatePage")
-	public String billUpdatePage(HttpSession session,ModelMap modelMap) {
-		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
-		if(employeeInfo!=null) {
-			//Valid details
+	public String billUpdatePage(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid details
 			return "employeeBillUpdatePage";
-		}else {
-			//Invalid details
+		} else {
+			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
 			return "employeeLogin";
 		}
-	}//End of billUpdatePage()
-	
+	}// End of billUpdatePage()
+
 	@PostMapping("/billUpdate")
-	public String billUpdate(HttpSession session,ModelMap modelMap,ConsumerCurrentBill consumerCurrentBill) {
-		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
-		if(employeeInfo!=null) {
-			//Valid details
+	public String billUpdate(HttpSession session, ModelMap modelMap, ConsumerCurrentBill consumerCurrentBill) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid details
 			if (service.billUpdate(consumerCurrentBill)) {
 				modelMap.addAttribute("msg", "Bill Updation Successfull..");
-			}else {
+			} else {
 				modelMap.addAttribute("errMsg", "Bill Updation Failed!!");
 			}
 			return "employeeBillUpdatePage";
-		}else {
-			//Invalid details
+		} else {
+			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
 			return "employeeLogin";
 		}
-	}//End of billUpdate()
-	
+	}// End of billUpdate()
+
 	@GetMapping("/logout")
-	public String logout(HttpSession session,ModelMap modelMap) {
+	public String logout(HttpSession session, ModelMap modelMap) {
 		session.invalidate();
 		modelMap.addAttribute("msg", "You are Successfully Logged Out");
 		return "employeeLogin";
-	}//End of logout()
-	
+	}// End of logout()
+
 	@GetMapping("/getComments")
-	public String getComments(HttpSession session,ModelMap modelMap) {
-		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
-		if(employeeInfo!=null) {
-			//Valid details
-			List<ContactUsInfo> list=service.getComments();
-			if (list!=null&&!list.isEmpty()) {
+	public String getComments(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid details
+			List<ContactUsInfo> list = service.getComments();
+			if (list != null && !list.isEmpty()) {
 				modelMap.addAttribute("list", list);
-				
-			}else {
+
+			} else {
 				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
 			}
 			return "commentsPage";
-		}else {
-			//Invalid details
+		} else {
+			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
 			return "employeeLogin";
 		}
-	}//End of getComments()
-	
-	
+	}// End of getComments()
+
 	@GetMapping("/searchPage")
-	public String searchPage(HttpSession session,ModelMap modelMap) {
-		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
-		if(employeeInfo!=null) {
-			//Valid details
+	public String searchPage(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid details
 			return "employeeSearch";
-		}else {
-			//Invalid details
+		} else {
+			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
 			return "employeeLogin";
 		}
-	}//End of searchPage()
-	
+	}// End of searchPage()
+
 	@PostMapping("displayLinks")
-	public String displayLinks(HttpSession session,ModelMap modelMap,String rrNumber) {
-		EmployeeInfo employeeInfo=(EmployeeInfo)session.getAttribute("valid");
-		if(employeeInfo!=null) {
-			//Valid details
+	public String displayLinks(HttpSession session, ModelMap modelMap, String rrNumber) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid details
 			session.setAttribute("sessionRRNumber", rrNumber);
 			modelMap.addAttribute("rrNumber", rrNumber);
 			return "employeeSearch";
-		}else {
-			//Invalid details
+		} else {
+			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
 			return "employeeLogin";
 		}
-	}//End of displayLinks()
-	
+	}// End of displayLinks()
+
 	@GetMapping("/searchConsumerDetails")
-	public String searchConsumerDetails(HttpSession session,ModelMap modelMap) {
-		String rrNumber=(String)session.getAttribute("sessionRRNumber");
-		ConsumerInfo consumerInfo=service.getConsumerInfo(rrNumber);
+	public String searchConsumerDetails(HttpSession session, ModelMap modelMap) {
+		String rrNumber = (String) session.getAttribute("sessionRRNumber");
+		ConsumerInfo consumerInfo = service.getConsumerInfo(rrNumber);
 		if (consumerInfo != null) {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("consumerInfo", consumerInfo);
-		}else {
+		} else {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
-	}//End of searchConsumerDetails()
-	
+	}// End of searchConsumerDetails()
+
 	@GetMapping("/searchConsumerCurrentBillDetails")
-	public String searchConsumerCurrentBillDetails(HttpSession session,ModelMap modelMap) {
-		String rrNumber=(String)session.getAttribute("sessionRRNumber");
-		ConsumerCurrentBill currentBill=service.getConsumerCurrentBill(rrNumber);
+	public String searchConsumerCurrentBillDetails(HttpSession session, ModelMap modelMap) {
+		String rrNumber = (String) session.getAttribute("sessionRRNumber");
+		ConsumerCurrentBill currentBill = service.getConsumerCurrentBill(rrNumber);
 		if (currentBill != null) {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("currentBill", currentBill);
-		}else {
+		} else {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
-	}//End of searchConsumerDetails()
-	
+	}// End of searchConsumerDetails()
+
 	@GetMapping("/searchMonthlyConsumtionDetails")
-	public String searchMonthlyConsumtionDetails(HttpSession session,ModelMap modelMap) {
-		String rrNumber=(String)session.getAttribute("sessionRRNumber");
-		List<MonthlyConsumtion> monthlyConsumtion=service.getMonthlyConsumption(rrNumber);
+	public String searchMonthlyConsumtionDetails(HttpSession session, ModelMap modelMap) {
+		String rrNumber = (String) session.getAttribute("sessionRRNumber");
+		List<MonthlyConsumtion> monthlyConsumtion = service.getMonthlyConsumption(rrNumber);
 		if (monthlyConsumtion != null) {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("monthlyConsumtion", monthlyConsumtion);
-		}else {
+		} else {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
-	}//End of searchMonthlyConsumtionDetails()
-	
+	}// End of searchMonthlyConsumtionDetails()
+
 	@GetMapping("/searchPaymentDetails")
-	public String searchPaymentDetails(HttpSession session,ModelMap modelMap) {
-		String rrNumber=(String)session.getAttribute("sessionRRNumber");
-		PaymentDetails paymentDetails=service.getPaymentDetails(rrNumber);
+	public String searchPaymentDetails(HttpSession session, ModelMap modelMap) {
+		String rrNumber = (String) session.getAttribute("sessionRRNumber");
+		PaymentDetails paymentDetails = service.getPaymentDetails(rrNumber);
 		if (paymentDetails != null) {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("paymentDetails", paymentDetails);
-		}else {
+		} else {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("errMsg", "Details are Not Found!!");
 		}
 		return "employeeSearch";
-	}//End of searchPaymentDetails()
-	
-	
+	}// End of searchPaymentDetails()
+
+	@GetMapping("/getAllConsumerInfo")
+	public String getAllConsumerInfo(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid Session
+			List<ConsumerInfo> list = service.getAllConsumerDetails(employeeInfo.getRegion());
+			if (list != null && !list.isEmpty()) {
+				modelMap.addAttribute("list", list);
+				modelMap.addAttribute("employee", employeeInfo);
+			} else {
+				modelMap.addAttribute("errMsg", "Data Not Found!");
+			}
+			return "employeeSearchingHome";
+		} else {
+			// Invalid Session
+			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
+			return "employeeLogin";
+		}
+	}// End of getAllConsumerInfo()
+
+	@GetMapping("/getAllCurrentBills")
+	public String getAllCurrentBills(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid Session
+			List<ConsumerCurrentBill> list = service.getAllConsumerCurrentBills(employeeInfo.getRegion());
+			if (list != null && !list.isEmpty()) {
+				modelMap.addAttribute("billList", list);
+				modelMap.addAttribute("employee", employeeInfo);
+			} else {
+				modelMap.addAttribute("errMsg", "Data Not Found!");
+			}
+			return "employeeSearchingHome";
+		} else {
+			// Invalid Session
+			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
+			return "employeeLogin";
+		}
+	}// End of getAllCurrentBills()
+
 }// End of EmployeeController

@@ -26,7 +26,7 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 		if (empId < 1) {
 			throw new EmployeeLoginException("Employee Id Not Contains Negative Values");
 		}
-		if (password.trim().length()<5) {
+		if (password.trim().length() < 5) {
 			throw new EmployeeLoginException("Please Enter Proper Password Length!!");
 		}
 		return dao.authenticate(empId, password);
@@ -35,44 +35,55 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 	@Override
 	public List<PaymentDetails> displayHome(String region) {
 		return dao.displayHome(region);
-	}//End of displayHome()
+	}// End of displayHome()
 
 	@Override
 	public boolean billUpdate(ConsumerCurrentBill consumerCurrentBill) {
-		ConsumerCurrentBill consumerCurrentBill2=dao.getConsumerCurrentBill(consumerCurrentBill.getRrNumber());
-		if (consumerCurrentBill2!=null) {
-			
-			if (consumerCurrentBill.getFinalUnits()<consumerCurrentBill2.getFinalUnits()) {
-				throw new BillUpdatePageException("Final value readings are less compare to previeous readings please check once!!");
+		ConsumerCurrentBill consumerCurrentBill2 = dao.getConsumerCurrentBill(consumerCurrentBill.getRrNumber());
+		if (consumerCurrentBill2 != null) {
+
+			if (consumerCurrentBill.getFinalUnits() < consumerCurrentBill2.getFinalUnits()) {
+				throw new BillUpdatePageException(
+						"Final value readings are less compare to previeous readings please check once!!");
 			}
 		}
 		return dao.billUpdate(consumerCurrentBill);
-	}//End of billUpdate()
+	}// End of billUpdate()
 
 	@Override
 	public List<ContactUsInfo> getComments() {
 		return dao.getComments();
-	}//End of getComments()
+	}// End of getComments()
 
 	@Override
 	public ConsumerInfo getConsumerInfo(String rrNumber) {
-		
+
 		return dao.getConsumerInfo(rrNumber);
-	}//End of getConsumerInfo()
+	}// End of getConsumerInfo()
 
 	@Override
 	public ConsumerCurrentBill getConsumerCurrentBill(String rrNumber) {
 		return dao.getConsumerCurrentBill(rrNumber);
-	}//End of getConsumerCurrentBill()
+	}// End of getConsumerCurrentBill()
 
 	@Override
 	public List<MonthlyConsumtion> getMonthlyConsumption(String rrNumber) {
 		return dao.getMonthlyConsumption(rrNumber);
-	}//End of getMonthlyConsumption()
+	}// End of getMonthlyConsumption()
 
 	@Override
 	public PaymentDetails getPaymentDetails(String rrNumber) {
 		return dao.getPaymentDetails(rrNumber);
-	}//End of getPaymentDetails()
+	}// End of getPaymentDetails()
+
+	@Override
+	public List<ConsumerInfo> getAllConsumerDetails(String region) {
+		return dao.getAllConsumerDetails(region);
+	}// End of getAllConsumerDetails()
+
+	@Override
+	public List<ConsumerCurrentBill> getAllConsumerCurrentBills(String region) {
+		return dao.getAllConsumerCurrentBills(region);
+	}// End of getAllConsumerCurrentBills()
 
 }// End of class

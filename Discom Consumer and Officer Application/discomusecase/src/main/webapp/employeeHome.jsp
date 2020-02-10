@@ -39,7 +39,7 @@
 				<th>Remaining Amount</th>
 			</tr>
 		<%for(PaymentDetails details:list){ %>
-			<tr style="color:lime;">
+			<tr style="color:olive;">
 				<td><%=details.getRrNumber() %></td>
 				<td><%=details.getAmount() %></td>
 				<td><%=details.getAmountPaid() %></td>
