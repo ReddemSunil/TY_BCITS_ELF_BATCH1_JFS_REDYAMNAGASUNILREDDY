@@ -6,6 +6,7 @@
   <%String errMsg=(String)request.getAttribute("errMsg");
   	List<PaymentDetails> list=(List<PaymentDetails>)request.getAttribute("list");
   	EmployeeInfo employeeInfo=(EmployeeInfo)request.getAttribute("employee");
+  	PaymentDetails paymentDetails=(PaymentDetails)request.getAttribute("paymentDetails"); 
   %>
  <jsp:include page="employeeHeader.jsp"/>  
  <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -29,6 +30,13 @@
 	  Employee Region : <%=employeeInfo.getRegion()%><br>
 	
 	</h3><br>
+	<%if(paymentDetails!=null){ %>
+	<h3 style="text-align: center;color: navy;">Monthly Revenue</h3>
+	<h5>Total Amount   :<%=paymentDetails.getAmount() %><br>
+		Received Amount:<%=paymentDetails.getAmountPaid() %><br>
+		Due Amount     :<%=paymentDetails.getRemainingAmount() %>
+	</h5>
+	<%} %>
 	<%if(list!=null&&!list.isEmpty()){ %>
 	<h5>
 		<table align="center" style="width: 80%;height: 50%;">
@@ -48,6 +56,7 @@
 		</table>
 		</h5>
 	<%} %>
+	
 
 
 

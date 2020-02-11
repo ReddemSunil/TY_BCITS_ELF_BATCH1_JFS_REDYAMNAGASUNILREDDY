@@ -6,7 +6,7 @@ import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
 import com.bcits.discomusecase.bean.EmployeeInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 
 public interface EmployeeDAO {
@@ -22,11 +22,14 @@ public interface EmployeeDAO {
 
 	public ConsumerCurrentBill getConsumerCurrentBill(String rrNumber);
 
-	public List<MonthlyConsumtion> getMonthlyConsumption(String rrNumber);
+	public List<BillHistory> getBillHistory(String rrNumber);
 
 	public PaymentDetails getPaymentDetails(String rrNumber);
 
 	public List<ConsumerInfo> getAllConsumerDetails(String region);
 
 	public List<ConsumerCurrentBill> getAllConsumerCurrentBills(String region);
+
+	public PaymentDetails getMonthlyRevenue(String region);
+
 }// End of interface

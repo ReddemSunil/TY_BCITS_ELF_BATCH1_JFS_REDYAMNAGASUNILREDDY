@@ -1,13 +1,14 @@
-<%@page import="com.bcits.discomusecase.bean.MonthlyConsumtion"%>
+<%@page import="com.bcits.discomusecase.bean.BillHistory"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%String errMsg=(String)request.getAttribute("errMsg");
- 	List<MonthlyConsumtion> list=(List<MonthlyConsumtion>)request.getAttribute("list");
-	SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-	String rrNumber=(String)request.getAttribute("rrNumber");
-%>
+ <%
+ 	String errMsg=(String)request.getAttribute("errMsg");
+  	List<BillHistory> list=(List<BillHistory>)request.getAttribute("list");
+ 	SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+ 	String rrNumber=(String)request.getAttribute("rrNumber");
+ %>
 <jsp:include page="header.jsp"/>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
@@ -24,8 +25,10 @@
 </style>
 </head>
 <body style="background-color: lightgreen;"><br><br>
-	<h3 style="color: navy;text-align: center;">History Of RR Number : <%=rrNumber %></h3><br>
-	<%if(list!=null&&!list.isEmpty()){ %>
+	<h3 style="color: navy;text-align: center;">History Of RR Number : <%=rrNumber%></h3><br>
+	<%
+		if(list!=null&&!list.isEmpty()){
+	%>
 	<h5>
 		<table align="center" border="1" style="width: 80%;height: 50%;">
 			<tr style="background-color: lightblue;">
@@ -36,7 +39,9 @@
 				<th>Due Date</th>
 				<th>Amount</th>
 			</tr>
-		<%for(MonthlyConsumtion consumtion:list){ %>
+		<%
+			for(BillHistory consumtion:list){
+		%>
 			<tr style="background-color:lime;">
 				<td><%=format.format(consumtion.getMoPk().getReadingsTakenOn()) %></td>
 				<td><%=consumtion.getUnitsConsumed() %></td>

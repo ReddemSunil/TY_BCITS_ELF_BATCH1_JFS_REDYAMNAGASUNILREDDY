@@ -9,7 +9,7 @@ import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
 import com.bcits.discomusecase.bean.EmployeeInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 import com.bcits.discomusecase.consumerException.BillUpdatePageException;
 import com.bcits.discomusecase.consumerException.ConsumerSigninException;
@@ -67,8 +67,8 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 	}// End of getConsumerCurrentBill()
 
 	@Override
-	public List<MonthlyConsumtion> getMonthlyConsumption(String rrNumber) {
-		return dao.getMonthlyConsumption(rrNumber);
+	public List<BillHistory> getMonthlyConsumption(String rrNumber) {
+		return dao.getBillHistory(rrNumber);
 	}// End of getMonthlyConsumption()
 
 	@Override
@@ -85,5 +85,10 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 	public List<ConsumerCurrentBill> getAllConsumerCurrentBills(String region) {
 		return dao.getAllConsumerCurrentBills(region);
 	}// End of getAllConsumerCurrentBills()
+
+	@Override
+	public PaymentDetails getMonthlyRevenue(String region) {
+		return dao.getMonthlyRevenue(region);
+	}// End of getMonthlyRevenue()
 
 }// End of class

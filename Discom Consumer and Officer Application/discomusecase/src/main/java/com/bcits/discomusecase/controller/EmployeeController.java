@@ -24,7 +24,7 @@ import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
 import com.bcits.discomusecase.bean.EmployeeInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 import com.bcits.discomusecase.consumerservicedao.ConsumerServiceDAO;
 import com.bcits.discomusecase.employeedservice.EmployeeServiceDAO;
@@ -56,9 +56,10 @@ public class EmployeeController {
 			modelMap.addAttribute("employee", employeeInfo);
 
 			List<PaymentDetails> list = service.displayHome(employeeInfo.getRegion());
+//			PaymentDetails paymentDetails = service.getMonthlyRevenue(employeeInfo.getRegion());
 			if (list != null && !list.isEmpty()) {
+//				modelMap.addAttribute("paymentDetails", paymentDetails);
 				modelMap.addAttribute("list", list);
-
 			} else {
 				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
 			}
@@ -77,7 +78,9 @@ public class EmployeeController {
 		if (employeeInfo != null) {
 			// Valid details
 			List<PaymentDetails> list = service.displayHome(employeeInfo.getRegion());
+//			PaymentDetails paymentDetails = service.getMonthlyRevenue(employeeInfo.getRegion());
 			if (list != null && !list.isEmpty()) {
+//				modelMap.addAttribute("paymentDetails", paymentDetails);
 				modelMap.addAttribute("list", list);
 				modelMap.addAttribute("employee", employeeInfo);
 
@@ -209,7 +212,7 @@ public class EmployeeController {
 	@GetMapping("/searchMonthlyConsumtionDetails")
 	public String searchMonthlyConsumtionDetails(HttpSession session, ModelMap modelMap) {
 		String rrNumber = (String) session.getAttribute("sessionRRNumber");
-		List<MonthlyConsumtion> monthlyConsumtion = service.getMonthlyConsumption(rrNumber);
+		List<BillHistory> monthlyConsumtion = service.getMonthlyConsumption(rrNumber);
 		if (monthlyConsumtion != null) {
 			modelMap.addAttribute("rrNumber", rrNumber);
 			modelMap.addAttribute("monthlyConsumtion", monthlyConsumtion);

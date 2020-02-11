@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 import com.bcits.discomusecase.consumerException.ConsumerLoginException;
 import com.bcits.discomusecase.consumerException.ConsumerPaymentException;
@@ -87,7 +87,7 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 	}// End of addComments()
 
 	@Override
-	public List<MonthlyConsumtion> findBillHistory(String rrNumber) {
+	public List<BillHistory> findBillHistory(String rrNumber) {
 		return dao.findBillHistory(rrNumber);
 	}// End of findBillHistory()
 

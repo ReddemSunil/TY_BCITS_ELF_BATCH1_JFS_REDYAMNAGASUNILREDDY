@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="com.bcits.discomusecase.bean.MonthlyConsumtion"%>
+<%@page import="com.bcits.discomusecase.bean.BillHistory"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.bcits.discomusecase.bean.ConsumerCurrentBill"%>
 <%@page import="com.bcits.discomusecase.bean.PaymentDetails"%>
@@ -7,14 +7,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<%String errMsg=(String)request.getAttribute("errMsg"); 
+<%
+	String errMsg=(String)request.getAttribute("errMsg"); 
 	String rrNumber=(String)request.getAttribute("rrNumber");
     ConsumerInfo info=(ConsumerInfo)request.getAttribute("consumerInfo");
     PaymentDetails details=(PaymentDetails)request.getAttribute("paymentDetails");
     ConsumerCurrentBill bill=(ConsumerCurrentBill)request.getAttribute("currentBill");
-    List<MonthlyConsumtion> list=(List<MonthlyConsumtion>)request.getAttribute("monthlyConsumtion");
+    List<BillHistory> list=(List<BillHistory>)request.getAttribute("monthlyConsumtion");
     SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-
 %>
 
  <jsp:include page="employeeHeader.jsp"/>  
@@ -45,69 +45,75 @@
                   <div class="text-center ">
                      <button type="submit" style="background-color: green;">Search</button>
                   </div>
-                  <%if(rrNumber!=null && !rrNumber.isEmpty()){ %>
+                  <%
+                  	if(rrNumber!=null && !rrNumber.isEmpty()){
+                  %>
              
-                  	<h5>RR Number Is : <%=rrNumber %><br>
-                  	Search For<a href="../employee/searchConsumerDetails"> ConsumerDetails </a><br>
-                  		Search For<a href="../employee/searchConsumerCurrentBillDetails"> CurrentBillConsumption </a><br>
-                  		Search For<a href="../employee/searchMonthlyConsumtionDetails"> MonthlyBillConsumption </a><br>
-                  		Search For<a href="../employee/searchPaymentDetails"> PaymentDetails </a><br>
+                  	<h5>RR Number Is : <%=rrNumber%><br>
+                  	Search For<a href="../employee/searchConsumerDetails"> Consumer Details </a><br>
+                  		Search For<a href="../employee/searchConsumerCurrentBillDetails"> CurrentBill Consumption </a><br>
+                  		Search For<a href="../employee/searchMonthlyConsumtionDetails"> Bill History </a><br>
+                  		Search For<a href="../employee/searchPaymentDetails"> Payment Details </a><br>
                   	</h5>
-                  <%} %>
+                  <%
+                  	}
+                  %>
                   </form>
 			</div>
 		</div>
 	</div>
 </div>
 <div align="center">
-	<%if(info!=null){ %>
+	<%
+		if(info!=null){
+	%>
 		<fieldset>
 			<legend style="color: navy;">ConsumerDetails</legend>
 			<table style="font-size: 20px">
 				<tr>
 					<td>First Name</td>
 					<td> : </td>
-					<td><%=info.getFirstName() %></td>
+					<td><%=info.getFirstName()%></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
 					<td> : </td>
-					<td><%=info.getLastName() %></td>
+					<td><%=info.getLastName()%></td>
 				</tr>
 				<tr>
 					<td>Contact Number</td>
 					<td> : </td>
-					<td><%=info.getContactNumber() %></td>
+					<td><%=info.getContactNumber()%></td>
 				</tr>
 				<tr>
 					<td>Email</td>
 					<td> : </td>
-					<td><%=info.getMail() %></td>
+					<td><%=info.getMail()%></td>
 				</tr>
 				<tr>
 					<td>Region</td>
 					<td> : </td>
-					<td><%=info.getRegion() %></td>
+					<td><%=info.getRegion()%></td>
 				</tr>
 				<tr>
 					<td>Type Of Consumer</td>
 					<td> : </td>
-					<td><%=info.getTypeOfConsumer() %></td>
+					<td><%=info.getTypeOfConsumer()%></td>
 				</tr>
 				<tr>
 					<td>Address Line1</td>
 					<td> : </td>
-					<td><%=info.getAddress1() %></td>
+					<td><%=info.getAddress1()%></td>
 				</tr>
 				<tr>
 					<td>Address Line2</td>
 					<td> : </td>
-					<td><%=info.getAddress2() %></td>
+					<td><%=info.getAddress2()%></td>
 				</tr>
 				<tr>
 					<td>Pincode</td>
 					<td> : </td>
-					<td><%=info.getPincode() %></td>
+					<td><%=info.getPincode()%></td>
 				</tr>
 				
 			</table>
@@ -115,83 +121,95 @@
 		</fieldset>
 		
 		
-	<%} %>
+	<%
+						}
+					%>
 	
-	<%if(details!=null){ %>
+	<%
+			if(details!=null){
+		%>
 		<fieldset>
 			<legend style="color: navy;">Consumer Payment Details</legend>
 			<table style="font-size: 20px">
 				<tr>
 					<td>RR Number</td>
 					<td> : </td>
-					<td><%=details.getRrNumber() %></td>
+					<td><%=details.getRrNumber()%></td>
 				</tr>
 				<tr>
 					<td>Totol Amount</td>
 					<td> : </td>
-					<td><%=details.getAmount() %></td>
+					<td><%=details.getAmount()%></td>
 				</tr>
 				<tr>
 					<td>AmountPaid</td>
 					<td> : </td>
-					<td><%=details.getAmountPaid() %></td>
+					<td><%=details.getAmountPaid()%></td>
 				</tr>
 				<tr>
 					<td>RemainingAmount</td>
 					<td> : </td>
-					<td><%=details.getRemainingAmount() %></td>
+					<td><%=details.getRemainingAmount()%></td>
 				</tr>
 			</table>
 		
 		</fieldset>
-		<%} %>
-		<%if(bill!=null){ %>
+		<%
+			}
+		%>
+		<%
+			if(bill!=null){
+		%>
 		<fieldset>
 			<legend style="color: navy;">Consumer Bill Details</legend>
 			<table style="font-size: 20px">
 				<tr>
 					<td>RR Number</td>
 					<td> : </td>
-					<td><%=bill.getRrNumber() %></td>
+					<td><%=bill.getRrNumber()%></td>
 				</tr>
 				<tr>
 					<td>Totol Amount</td>
 					<td> : </td>
-					<td><%=bill.getAmount() %></td>
+					<td><%=bill.getAmount()%></td>
 				</tr>
 				<tr>
 					<td>Initial Units</td>
 					<td> : </td>
-					<td><%=bill.getInitialUnits() %></td>
+					<td><%=bill.getInitialUnits()%></td>
 				</tr>
 				<tr>
 					<td>Final Units</td>
 					<td> : </td>
-					<td><%=bill.getFinalUnits() %></td>
+					<td><%=bill.getFinalUnits()%></td>
 				</tr>
 				<tr>
 					<td>Units Consumed</td>
 					<td> : </td>
-					<td><%=bill.getUnitsConsumed() %></td>
+					<td><%=bill.getUnitsConsumed()%></td>
 				</tr>
 				<tr>
 					<td>Readings Taken</td>
 					<td> : </td>
-					<td><%=format.format(bill.getReadingsTakenOn()) %></td>
+					<td><%=format.format(bill.getReadingsTakenOn())%></td>
 				</tr>
 				<tr>
 					<td>Due Date</td>
 					<td> : </td>
-					<td><%=format.format(bill.getDueDate()) %></td>
+					<td><%=format.format(bill.getDueDate())%></td>
 				</tr>
 			</table>
 		
 		</fieldset>
 		
 		
-	<%} %>
+	<%
+						}
+					%>
 	
-	<%if(list!=null&&!list.isEmpty()){ %>
+	<%
+			if(list!=null&&!list.isEmpty()){
+		%>
 	<fieldset>
 			<legend style="color: navy;">Monthly Consumtion Details</legend>
 	<h5>
@@ -205,7 +223,9 @@
 				<th>Readings Taken</th>
 				<th>Due Date</th>
 			</tr>
-		<%for(MonthlyConsumtion monthlyConsumtion:list){ %>
+		<%
+			for(BillHistory monthlyConsumtion:list){
+		%>
 			<tr>
 				<td><%=monthlyConsumtion.getMoPk().getRrNumber() %></td>
 				<td><%=monthlyConsumtion.getAmount() %></td>

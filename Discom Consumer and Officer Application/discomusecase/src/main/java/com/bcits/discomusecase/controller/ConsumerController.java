@@ -22,14 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 import com.bcits.discomusecase.consumerservicedao.ConsumerServiceDAO;
 
 @Controller
 @RequestMapping("/consumer")
 public class ConsumerController {
-
 	@Autowired
 	private ConsumerServiceDAO service;
 
@@ -72,7 +71,6 @@ public class ConsumerController {
 			// Valid Session
 			ConsumerCurrentBill consumerCurrentBill = service.findBillDetailes(consumerInfo.getRrNumber());
 			if (consumerCurrentBill != null) {
-
 				req.setAttribute("consumerCurrentBill", consumerCurrentBill);
 			} else {
 				req.setAttribute("errMsg", "Details Not Found");
@@ -156,11 +154,22 @@ public class ConsumerController {
 			
 				ConsumerCurrentBill bill=service.findBillDetailes(consumerInfo.getRrNumber());
 				if (bill==null) {
+					
 					modelMap.addAttribute("errMsg", "You are a new user as of now your bill not yet generated!!");
 					return "consumerHome";
-				}else {
+				}else if (bill.getAmount()==0.0) {
+					modelMap.addAttribute("consumerCurrentBill", bill);
+					modelMap.addAttribute("errMsg", "Your Bill is Paided!!");
+					return "consumerHome";
+				} else {
+					if (bill.getCount()==1) {
+						modelMap.addAttribute("bill", bill);
+						return "billPaymentPage";
+					}else {
+						modelMap.addAttribute("errMsg", "Only Once You Can Pay the bill Per Month");
+						return "consumerHome";
+					}
 					
-					return "billPaymentPage";
 				}
 				
 		} else {
@@ -240,7 +249,7 @@ public class ConsumerController {
 		String rrNumber=consumerInfo.getRrNumber();
 		if (consumerInfo != null) {
 			//Valid Session
-			List<MonthlyConsumtion> list=service.findBillHistory(rrNumber);
+			List<BillHistory> list=service.findBillHistory(rrNumber);
 			if(list!=null&&!list.isEmpty()) {
 				modelMap.addAttribute("list", list);
 				modelMap.addAttribute("rrNumber", consumerInfo.getRrNumber());

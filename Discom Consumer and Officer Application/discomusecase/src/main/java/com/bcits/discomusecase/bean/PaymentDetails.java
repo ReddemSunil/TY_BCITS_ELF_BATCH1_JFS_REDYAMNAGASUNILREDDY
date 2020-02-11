@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "payment_details")
-public class PaymentDetails implements Serializable{
+public class PaymentDetails {
 	@Id
 	@Column(name = "rr_Number")
 	private String rrNumber;

@@ -16,8 +16,8 @@ import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
 import com.bcits.discomusecase.bean.EmployeeInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumptionPK;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistoryPK;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 import com.bcits.discomusecase.billtariff.BillTariff;
 import com.bcits.discomusecase.mail.MailMail;
@@ -69,13 +69,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				initialUnits = bill.getFinalUnits();
 				preAmount = bill.getAmount();
 
-				MonthlyConsumtion mConsumtion = new MonthlyConsumtion();
+				BillHistory mConsumtion = new BillHistory();
 				mConsumtion.setAmount(bill.getAmount());
 				mConsumtion.setDueDate(bill.getDueDate());
 				mConsumtion.setFinalUnits(bill.getFinalUnits());
 				mConsumtion.setInitialUnits(bill.getInitialUnits());
 				mConsumtion.setUnitsConsumed(bill.getUnitsConsumed());
-				MonthlyConsumptionPK mConsumptionPK = new MonthlyConsumptionPK();
+				BillHistoryPK mConsumptionPK = new BillHistoryPK();
 				mConsumptionPK.setRrNumber(bill.getRrNumber());
 				mConsumptionPK.setReadingsTakenOn(bill.getReadingsTakenOn());
 
@@ -92,6 +92,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					bill.setInitialUnits(initialUnits);
 					bill.setUnitsConsumed(unitsConsumed);
 					bill.setAmount(amount);
+					bill.setCount(1);
 					transaction.commit();
 
 					transaction.begin();
@@ -121,6 +122,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					consumerCurrentBill.setInitialUnits(initialUnits);
 					consumerCurrentBill.setUnitsConsumed(unitsConsumed);
 					consumerCurrentBill.setAmount(amount);
+					consumerCurrentBill.setCount(1);
 					manager.persist(consumerCurrentBill);
 					transaction.commit();
 
@@ -186,12 +188,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}// End of getConsumerCurrentBill()
 
 	@Override
-	public List<MonthlyConsumtion> getMonthlyConsumption(String rrNumber) {
+	public List<BillHistory> getBillHistory(String rrNumber) {
 		EntityManager manager = factory.createEntityManager();
-		String jpql = "from MonthlyConsumtion m where m.moPk.rrNumber = :id";
+		String jpql = "from BillHistory m where m.moPk.rrNumber = :id";
 		Query query = manager.createQuery(jpql);
 		query.setParameter("id", rrNumber);
-		List<MonthlyConsumtion> list = query.getResultList();
+		List<BillHistory> list = query.getResultList();
 		if (list != null && !list.isEmpty()) {
 			return list;
 		} else {
@@ -238,5 +240,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return null;
 		}
 	}// End of getAllConsumerCurrentBills()
+
+	@Override
+	public PaymentDetails getMonthlyRevenue(String region) {
+		EntityManager manager = factory.createEntityManager();
+//		String jpql = "select sum(amount),sum(amountPaid),sum(remainingAmount) from PaymentDetails where rrNumber in (select rrNumber from ConsumerInfo where region=:region)";
+//		Query query = manager.createQuery(jpql);
+//		query.setParameter("region", region);
+//		PaymentDetails paymentDetails = (PaymentDetails) query.getSingleResult();
+		manager.createQuery("select sum(amount) from PaymentDetails where rrNumber in (select rrNumber from ConsumerInfo where region=:region)");
+//		if (paymentDetails != null) {
+//			return paymentDetails;
+//		}
+		return null;
+	}// End of getMonthlyRevenue()
+
 
 }// End of class

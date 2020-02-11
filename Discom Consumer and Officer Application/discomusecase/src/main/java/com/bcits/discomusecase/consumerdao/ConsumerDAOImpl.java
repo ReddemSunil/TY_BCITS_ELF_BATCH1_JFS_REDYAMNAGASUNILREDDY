@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
-import com.bcits.discomusecase.bean.MonthlyConsumtion;
+import com.bcits.discomusecase.bean.BillHistory;
 import com.bcits.discomusecase.bean.PaymentDetails;
 
 @Repository
@@ -125,12 +125,12 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 	}// End of addComments()
 
 	@Override
-	public List<MonthlyConsumtion> findBillHistory(String rrNumber) {
+	public List<BillHistory> findBillHistory(String rrNumber) {
 		EntityManager manager = factory.createEntityManager();
-		String jpql = "from MonthlyConsumtion m where m.moPk.rrNumber = :id";
+		String jpql = "from BillHistory m where m.moPk.rrNumber = :id";
 		Query query = manager.createQuery(jpql);
 		query.setParameter("id", rrNumber);
-		List<MonthlyConsumtion> list = query.getResultList();
+		List<BillHistory> list = query.getResultList();
 		if (list != null && !list.isEmpty()) {
 			return list;
 		} else {
@@ -155,11 +155,13 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 							paymentDetails.getRrNumber());
 
 					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
+					consumerCurrentBill.setCount(0);
 				} else {
 					ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class,
 							paymentDetails.getRrNumber());
 
 					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
+					consumerCurrentBill.setCount(0);
 					manager.persist(paymentDetails);
 				}
 

@@ -93,10 +93,11 @@
 					<h3><input type="submit" value="PayBill" style="background-color:green;"></h3>
 				</div>
 			</form>
+			<h5 style="color: red;">Remember : In a Month Only Once You Can Pay the Bill</h5>
 		</div>
 	</div>
 	<%if(errMsg!=null&&!errMsg.isEmpty()) {%>
-		<h2 style="color: red; text-align: center;"><%=errMsg %></h2>
+		<h4 style="color: red; text-align: center;"><%=errMsg %></h4>
 	<%} %>
 	<script src="${js}/jquery-3.4.1.js"></script>
 	<script src="${js}/bootstrap.min.js"></script>

@@ -1,21 +1,19 @@
 package com.bcits.discomusecase.bean;
 
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Data;
-
 @Data
-@Entity(name = "current_bill")
-public class ConsumerCurrentBill implements Serializable {
-	@Id
-	@Column(name = "rr_number")
-	private String rrNumber;
+@Entity
+@Table(name = "bill_history")
+public class BillHistory {
+	@EmbeddedId
+	private BillHistoryPK moPk;
 	@Column(name = "units_conumed")
 	private Integer unitsConsumed;
 	@Column
@@ -26,8 +24,5 @@ public class ConsumerCurrentBill implements Serializable {
 	private Integer finalUnits;
 	@Column(name = "initial_units")
 	private Integer initialUnits;
-	@Column(name = "readings_taken_on")
-	private Date readingsTakenOn;
-	@Column
-	private Integer count;
-}// End of class
+	
+}//End of class

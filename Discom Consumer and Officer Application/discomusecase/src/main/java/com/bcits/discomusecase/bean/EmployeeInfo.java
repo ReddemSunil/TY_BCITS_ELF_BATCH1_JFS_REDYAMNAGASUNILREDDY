@@ -24,5 +24,9 @@ public class EmployeeInfo implements Serializable {
 	@Column
 	private String password;
 	@Column
+	private String designation;
+	@Column
 	private String region;
+	@Column(name = "admin_id")
+	private Integer adminId;
 }// End of class
