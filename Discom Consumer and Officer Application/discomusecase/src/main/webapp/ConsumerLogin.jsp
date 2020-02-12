@@ -53,7 +53,7 @@
 			<div class="mx-auto d-block lineborder ">
 
 				<h1 style="color: gold; text-align: center;">Login Page</h1>
-				<form name="myform" method="post" action="../consumer/consumerLogin">
+				<form name="clogin" method="post" action="../consumer/consumerLogin" onsubmit="return validation()">
 					<div class="form-group">
 						<label for="" class="color" id="MeterNo" name="MeterNo">RRNumber</label>
 						<input type="text" class="form-control" id="meterno" required name="rrNumber">
@@ -67,7 +67,7 @@
 
 					</div>
 					<div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+						<input type="checkbox" class="form-check-input" name="checkbox" checked="checked">
 						<label class="form-check-label" for="exampleCheck1"
 							style="color: mintcream;">Check me out</label>
 					</div>
@@ -92,6 +92,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="${js}/consumerLogin.js"></script>
 	<script src="${js}/jquery-3.4.1.js"></script>
 	<script src="${js}/bootstrap.min.js"></script>
 </body>

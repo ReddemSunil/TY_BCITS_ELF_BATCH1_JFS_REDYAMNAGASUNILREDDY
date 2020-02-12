@@ -48,11 +48,12 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 				transaction.begin();
 				manager.persist(consumerInfo);
 				transaction.commit();
+				manager.close();
+				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			manager.close();
-			return true;
+			
 		}
 
 		return false;
@@ -155,13 +156,13 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 							paymentDetails.getRrNumber());
 
 					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
-					consumerCurrentBill.setCount(0);
+					consumerCurrentBill.setStatus("paid");
 				} else {
 					ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class,
 							paymentDetails.getRrNumber());
 
 					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
-					consumerCurrentBill.setCount(0);
+					consumerCurrentBill.setStatus("paid");
 					manager.persist(paymentDetails);
 				}
 

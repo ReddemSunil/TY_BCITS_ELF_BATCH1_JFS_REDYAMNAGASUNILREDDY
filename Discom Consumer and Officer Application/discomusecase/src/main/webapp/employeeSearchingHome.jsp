@@ -34,7 +34,9 @@
 	  Employee Region : <%=employeeInfo.getRegion()%><br>
 	
 	</h3><br>
-	<%if(list!=null&&!list.isEmpty()){ %>
+	<%if(list!=null&&!list.isEmpty()){ 
+		int i=0;
+	%>
 	<h5>
 		<table align="center" style="width: 80%;height: 50%;">
 			<tr style="color:orange;">
@@ -55,9 +57,13 @@
 				<td><%=details.getMail() %></td>
 				<td><%=details.getTypeOfConsumer() %></td>
 				<td><%=details.getRegion() %></td>
+				<%++i; %>
+				</tr>
 		<%} %>
 		</table>
-		</h5>
+		</h5><div align="center">
+		<label style="color: green;font-size:30px">Total No of Consumer In Your region = <%=i %></label>
+		</div>
 	<%} %>
 
 <%if(billList!=null&&!billList.isEmpty()){ %>

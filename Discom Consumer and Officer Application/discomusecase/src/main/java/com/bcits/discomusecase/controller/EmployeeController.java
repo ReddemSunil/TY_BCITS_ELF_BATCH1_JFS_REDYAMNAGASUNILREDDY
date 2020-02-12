@@ -141,7 +141,7 @@ public class EmployeeController {
 			List<ContactUsInfo> list = service.getComments();
 			if (list != null && !list.isEmpty()) {
 				modelMap.addAttribute("list", list);
-
+				session.setAttribute("list", list);
 			} else {
 				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
 			}
@@ -276,5 +276,47 @@ public class EmployeeController {
 			return "employeeLogin";
 		}
 	}// End of getAllCurrentBills()
+
+	@GetMapping("/responsePage")
+	public String displayResponsePage(String rrNumber, ModelMap modelMap, HttpSession session) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid Session
+			ContactUsInfo contactUsInfo = service.displayResponsePage(rrNumber);
+			if (contactUsInfo != null) {
+				session.setAttribute("contactUsInfo", contactUsInfo);
+				modelMap.addAttribute("contactUsInfo", contactUsInfo);
+			} else {
+				modelMap.addAttribute("errMsg", "Data Not Found For This Consumer");
+			}
+			return "employeeResponse";
+		} else {
+			// Invalid Session
+			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
+			return "employeeLogin";
+		}
+	}// End of displayResponsePage()
+
+	@PostMapping("/sendingResponse")
+	public String sendResponse(String suggestion, HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid Session
+			ContactUsInfo contactUsInfo = (ContactUsInfo) session.getAttribute("contactUsInfo");
+			List<ContactUsInfo> list =(List<ContactUsInfo>)session.getAttribute("list");
+			if (service.sedingResponse(suggestion, contactUsInfo)) {
+				modelMap.addAttribute("msg", "Response Sending Successful.");
+				modelMap.addAttribute("list", list);
+			} else {
+				modelMap.addAttribute("errMsg", "Response Sending Failed!");
+				modelMap.addAttribute("list", list);
+			}
+			return "commentsPage";
+		} else {
+			// Invalid Session
+			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
+			return "employeeLogin";
+		}
+	}// End of sendResponse()
 
 }// End of EmployeeController

@@ -92,7 +92,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					bill.setInitialUnits(initialUnits);
 					bill.setUnitsConsumed(unitsConsumed);
 					bill.setAmount(amount);
-					bill.setCount(1);
+					bill.setStatus("NotPaid");
 					transaction.commit();
 
 					transaction.begin();
@@ -122,7 +122,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					consumerCurrentBill.setInitialUnits(initialUnits);
 					consumerCurrentBill.setUnitsConsumed(unitsConsumed);
 					consumerCurrentBill.setAmount(amount);
-					consumerCurrentBill.setCount(1);
+					consumerCurrentBill.setStatus("NotPaid");
 					manager.persist(consumerCurrentBill);
 					transaction.commit();
 
@@ -248,12 +248,40 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 //		Query query = manager.createQuery(jpql);
 //		query.setParameter("region", region);
 //		PaymentDetails paymentDetails = (PaymentDetails) query.getSingleResult();
-		manager.createQuery("select sum(amount) from PaymentDetails where rrNumber in (select rrNumber from ConsumerInfo where region=:region)");
+		manager.createQuery(
+				"select sum(amount) from PaymentDetails where rrNumber in (select rrNumber from ConsumerInfo where region=:region)");
 //		if (paymentDetails != null) {
 //			return paymentDetails;
 //		}
 		return null;
 	}// End of getMonthlyRevenue()
 
+	@Override
+	public ContactUsInfo displayResponsePage(String rrNumber) {
+		EntityManager manager = factory.createEntityManager();
+		String jpql = "from ContactUsInfo where rrNumber=:rrNumber";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("rrNumber", rrNumber);
+		ContactUsInfo contactUsInfo = (ContactUsInfo) query.getSingleResult();
+		if (contactUsInfo != null) {
+			return contactUsInfo;
+		}
+		return null;
+	}// End of displayResponsePage()
+
+	@Override
+	public boolean sedingResponse(String suggestion, ContactUsInfo contactUsInfo) {
+		if (suggestion != null && !suggestion.isEmpty()) {
+			
+		ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
+
+		MailMail mm = (MailMail) context.getBean("mailMail");
+		mm.sendMail("rnsunil.software@gmail.com", contactUsInfo.getMail(), "Giving Suggestion",
+				"Your Question:" + contactUsInfo.getComments() + "\n \n Response:" + suggestion
+						+ "\n \n If You have any queries Plese Login.. Our Portal and add Comments");
+		return true;
+		}
+		return false;
+	}// End of sendingResponse()
 
 }// End of class

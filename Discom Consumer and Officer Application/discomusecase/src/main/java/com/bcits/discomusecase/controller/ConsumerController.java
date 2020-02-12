@@ -162,10 +162,11 @@ public class ConsumerController {
 					modelMap.addAttribute("errMsg", "Your Bill is Paided!!");
 					return "consumerHome";
 				} else {
-					if (bill.getCount()==1) {
+					if (bill.getStatus().equals("NotPaid")) {
 						modelMap.addAttribute("bill", bill);
 						return "billPaymentPage";
 					}else {
+						modelMap.addAttribute("consumerCurrentBill", bill);
 						modelMap.addAttribute("errMsg", "Only Once You Can Pay the bill Per Month");
 						return "consumerHome";
 					}

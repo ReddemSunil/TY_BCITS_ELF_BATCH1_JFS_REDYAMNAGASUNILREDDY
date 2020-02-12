@@ -31,5 +31,9 @@ public interface EmployeeDAO {
 	public List<ConsumerCurrentBill> getAllConsumerCurrentBills(String region);
 
 	public PaymentDetails getMonthlyRevenue(String region);
+	
+	public ContactUsInfo displayResponsePage(String rrNumber);
+	
+	public boolean sedingResponse(String suggestion,ContactUsInfo contactUsInfo);
 
 }// End of interface

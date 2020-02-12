@@ -28,10 +28,14 @@
 			<img src="${images}/electricity1.png"
 				style="width: 50%; height:100%;">
 		</div>
-		<div class="col-6">
+		<div class="col-5">
 			<h1 style="text-align: center; color: rgb(18, 80, 143);">Discom
 				Electricity portal</h1>
 			<h3 style="text-align: center; color: rgb(18, 80, 143);">Banglore</h3>
+		</div>
+		<div class="col-1">
+			<a href="./admin/adminPage"><button type="submit"
+				class="button" style="margin-top: 46%">admin</button></a>
 		</div>
 		<div class="col-2">
 			<a href="./consumer/consumerLoginPage"><button type="submit"

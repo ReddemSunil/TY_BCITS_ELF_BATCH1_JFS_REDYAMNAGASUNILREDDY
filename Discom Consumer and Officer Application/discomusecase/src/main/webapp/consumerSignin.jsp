@@ -25,7 +25,7 @@
 
 <body class="body">
 	<div class="container">
-		<form  action="./consumerSignin" method="post">
+		<form  action="./consumerSignin" method="post" name="signin" onsubmit="return validation()">
 			<br>
 			<h1 style="text-align: center;" class="text-warning">Discom
 				Consumer Sign In Page</h1>
@@ -58,7 +58,7 @@
 				<div class="col">
 					<label for="">Email</label> <input type="email"
 						class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp" placeholder="email" required
+						aria-describedby="emailHelp" placeholder="email @gmail.com" required
 						name="mail">
 				</div>
 			</div>
@@ -85,7 +85,7 @@
 				<div class="col">
 					<label for="">Type of consumers</label><br> <select
 						name="typeOfConsumer" id="" class="form-control">
-						<option value="Select" selected disabled>Select</option>
+						<option value="" selected disabled>Select</option>
 						<option value="Residential">Residential
 							consumers</option>
 						<option value="Commercial">Commercial consumers</option>
@@ -96,18 +96,18 @@
 			<div class="row">
 				<div class="col">
 					<label for="inputAddress">Address</label> <input type="text"
-						class="form-control" id="inputAddress" placeholder="1234 Main St"
+						class="form-control"  placeholder="1234 Main St"
 						name="address1">
 				</div>
 				<div class="col">
 					<label for="inputAddress2">Address 2</label> <input type="text"
-						class="form-control" id="inputAddress2"
+						class="form-control" 
 						placeholder="Apartment or floor" name="address2">
 
 				</div>
 				<div class="col">
 					<label for="inputZip">Pincode</label> <input type="text"
-						class="form-control" id="inputZip" name="pincode">
+						class="form-control" name="pincode">
 				</div>
 			</div>
 			<br>
@@ -124,6 +124,7 @@
 	<%
 		}
 	%>
+	<script src="${js }/consumerSignin.js"></script>
 	<script src="${js }/jquery-3.4.1.js"></script>
 	<script src="${js }/js/bootstrap.min.js"></script>
 </body>

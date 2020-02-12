@@ -29,5 +29,5 @@ public class ConsumerCurrentBill implements Serializable {
 	@Column(name = "readings_taken_on")
 	private Date readingsTakenOn;
 	@Column
-	private Integer count;
+	private String status;
 }// End of class

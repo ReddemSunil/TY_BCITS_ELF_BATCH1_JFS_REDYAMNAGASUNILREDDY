@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%String errMsg=(String)request.getAttribute("errMsg");
+     String msg=(String)request.getAttribute("msg");
 		List<ContactUsInfo> list=(List<ContactUsInfo>)request.getAttribute("list");
      %>
  <jsp:include page="employeeHeader.jsp"/>  
@@ -31,6 +32,7 @@
 				<th>Name</th>
 				<th>Mail</th>
 				<th>comments</th>
+				<th>Response</th>
 			</tr>
 		<%for(ContactUsInfo details:list){ %>
 			<tr style="color:navy;">
@@ -38,6 +40,7 @@
 				<td><%=details.getName() %></td>
 				<td><%=details.getMail()%></td>
 				<td><%=details.getComments() %></td>
+				<td><a href="../employee/responsePage?rrNumber=<%=details.getRrNumber()%>">Replay</a></td>
 		<%} %>
 		</table>
 		</h5>
@@ -47,6 +50,9 @@
 
 <%if(errMsg!=null&&!errMsg.isEmpty()) {%>
 		<h2 style="color: red; text-align: center;"><%=errMsg %></h2>
+	<%} %>
+	<%if(msg!=null&&!msg.isEmpty()) {%>
+		<h2 style="color: green; text-align: center;"><%=msg %></h2>
 	<%} %>
 <script src="${js}/jquery-3.4.1.js"></script>
 <script src="${js}/bootstrap.min.js"></script>

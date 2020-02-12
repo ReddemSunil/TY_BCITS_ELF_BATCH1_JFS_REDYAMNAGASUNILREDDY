@@ -26,6 +26,9 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 		if (rrNumber.startsWith("-")) {
 			throw new ConsumerLoginException("RR Number Should contains Positive values only");
 		}
+		if(password.trim().length()<5) {
+			throw new ConsumerLoginException("Pleas enter proper password length!");
+		}
 
 		return dao.authenticate(rrNumber, password);
 	}// End of authenticate()
@@ -58,6 +61,9 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 		}
 		if (consumerInfo.getTypeOfConsumer()==null) {
 			throw new ConsumerSigninException("please select consumer type!!");
+		}
+		if(consumerInfo.getPincode()<6) {
+			throw new ConsumerSigninException("please enter valid pincode");
 		}
 		
 		return dao.signinConumer(consumerInfo);
@@ -94,6 +100,9 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 	@Override
 	public boolean payment(PaymentDetails paymentDetails, Double amountPaid) {
 		if (amountPaid <= 0) {
+			throw new ConsumerPaymentException("Please enter valid amount");
+		}
+		if (amountPaid.toString().startsWith("-")) {
 			throw new ConsumerPaymentException("Please enter valid amount");
 		}
 		paymentDetails.setRemainingAmount(paymentDetails.getAmount() - amountPaid);

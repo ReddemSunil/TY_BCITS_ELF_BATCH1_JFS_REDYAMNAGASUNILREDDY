@@ -91,4 +91,14 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 		return dao.getMonthlyRevenue(region);
 	}// End of getMonthlyRevenue()
 
+	@Override
+	public ContactUsInfo displayResponsePage(String rrNumber) {
+		return dao.displayResponsePage(rrNumber);
+	}// End of displayResponsePage()
+
+	@Override
+	public boolean sedingResponse(String suggestion, ContactUsInfo contactUsInfo) {
+		return dao.sedingResponse(suggestion, contactUsInfo);
+	}// End of sendingResponse()
+
 }// End of class
