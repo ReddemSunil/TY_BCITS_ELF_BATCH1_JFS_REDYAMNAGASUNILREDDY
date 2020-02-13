@@ -36,7 +36,7 @@
       <div class="row">
          <div class="col-md-4">
             <div class="myform form "><br><br>
-               <form action="../employee/displayLinks" method="post">
+               <form action="../employee/displayLinks" method="post" name="empsearch" onsubmit="return validation()">
                <h3 style="color: navy;;">Search Page </h3>
                   <div class="form-group">
                   <label>RR Number</label><br>
@@ -248,6 +248,7 @@
 <%if(errMsg!=null&&!errMsg.isEmpty()) {%>
 		<h2 style="color: red; text-align: center;"><%=errMsg %></h2>
 		<% }%>
+<script src="${js}/employeeSearch.js"></script>
 <script src="${js}/jquery-3.4.1.js"></script>
 <script src="${js}/bootstrap.min.js"></script>
 </body>

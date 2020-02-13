@@ -24,5 +24,8 @@ public class BillHistory {
 	private Integer finalUnits;
 	@Column(name = "initial_units")
 	private Integer initialUnits;
-	
+	@Column
+	private String status;
+	@Column
+	private Double paidAmount;
 }//End of class

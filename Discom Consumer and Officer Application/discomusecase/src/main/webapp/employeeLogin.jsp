@@ -51,7 +51,7 @@ String msg=(String)request.getAttribute("msg");
 			<div class="mx-auto d-block lineborder ">
 				<br>
 				<h1 style="color: rgb(255, 233, 105);">Employee Login Page</h1>
-				<form name="myform" method="post" action="../employee/employeeLoginPage">
+				<form name="elogin" method="post" action="../employee/employeeLoginPage" onsubmit="return validation()">
 					<div class="form-group">
 						<label for="" class="color" id="empId" name="empId">EmpID</label>
 						<input type="number" class="form-control" id="empId" required name="empId">
@@ -64,7 +64,7 @@ String msg=(String)request.getAttribute("msg");
 
 					</div>
 					<div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1" checked="checked">
 						<label class="form-check-label" for="exampleCheck1"
 							style="color: darkmagenta;">Check me out</label>
 					</div>
@@ -80,6 +80,7 @@ String msg=(String)request.getAttribute("msg");
 			</div>
 		</div>
 	</div>
+	<script src="${js}/employeeLogin.js"></script>
 	<script src="${js}/jquery-3.4.1.js"></script>
 	<script src="${js}/bootstrap.min.js"></script>
 </body>

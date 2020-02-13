@@ -22,14 +22,15 @@
 		src="${images }/bcits.png" alt="" width="100px" height="100px">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<div class="collapse navbar-collapse head" id="navbarNavDropdown">
-		<h3>
+		<h5>
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link"
 					href="../employee/employeHome">Home<!--  <span class="sr-only">(current)</span> -->
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="../employee/searchPage">Search</a></li>
 				<li class="nav-item"><a class="nav-link" href="../employee/billUpdatePage">UpdateBill</a></li>
-				<li class="nav-item"><a class="nav-link" href="../employee/getComments">Comments</a></li>
+				<li class="nav-item"><a class="nav-link" href="../employee/monthlyRevenue">MonthlyRevenue</a></li>
+				<li class="nav-item"><a class="nav-link" href="../employee/getComments">ConsumerRequest</a></li>
 					<li class="nav-item nav-link">
 					<div class="dropdown">
 						<!-- <button class="dropbtn">Profile</button> -->
@@ -44,7 +45,7 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="./logout"><button style="background-color: green;margin-left: 600%">LogOut</button></a></li>
 			</ul>
-		</h3>
+		</h5>
 	</div>
 	</nav>
 	

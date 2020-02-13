@@ -30,7 +30,7 @@ public interface EmployeeServiceDAO {
 
 	public List<ConsumerCurrentBill> getAllConsumerCurrentBills(String region);
 
-	public PaymentDetails getMonthlyRevenue(String region);
+	public List<Object[]> getMonthlyRevenue(String region);
 	
 	public ContactUsInfo displayResponsePage(String rrNumber);
 	

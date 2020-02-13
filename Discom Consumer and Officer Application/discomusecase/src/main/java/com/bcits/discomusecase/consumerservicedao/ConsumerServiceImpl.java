@@ -26,7 +26,7 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 		if (rrNumber.startsWith("-")) {
 			throw new ConsumerLoginException("RR Number Should contains Positive values only");
 		}
-		if(password.trim().length()<5) {
+		if (password.trim().length() < 5) {
 			throw new ConsumerLoginException("Pleas enter proper password length!");
 		}
 
@@ -36,45 +36,59 @@ public class ConsumerServiceImpl implements ConsumerServiceDAO {
 	@Override
 	public boolean signinConumer(ConsumerInfo consumerInfo, String cPassword, String rrNumber) {
 
-		if (consumerInfo.getFirstName().length()>15) {
+		if (consumerInfo.getFirstName().trim().length() > 15) {
 			throw new ConsumerSigninException("First name Should contains lessthan 15 characters!!");
+		}
+		if (consumerInfo.getLastName().trim().length() > 25) {
+			throw new ConsumerSigninException("last name Should contains lessthan 20 characters!!");
 		}
 		if (rrNumber.startsWith("-")) {
 			throw new ConsumerSigninException("RR Number Should contains Positive values only");
 		}
-		
-		if(consumerInfo.getContactNumber().toString().length()>10) {
+
+		if (consumerInfo.getContactNumber().toString().length() > 12||consumerInfo.getContactNumber().toString().length() < 10) {
 			throw new ConsumerSigninException("Contact Number Must be contains 10 digits!");
 		}
 		if (!consumerInfo.getPassword().equals(cPassword)) {
 			throw new ConsumerSigninException("Password and ConfirmPassword Not Matched try Again!!");
 		}
-		if (consumerInfo.getPassword().trim().length()<5) {
+		if (consumerInfo.getPassword().trim().length() < 5) {
 			throw new ConsumerSigninException("Please Maintain Minimum Password Length(5)!!");
 		}
-		if (consumerInfo.getPincode().toString().length()>6) {
+		if (consumerInfo.getPincode().toString().length() > 6) {
 			throw new ConsumerSigninException("Pincode Must be contains 6 digits!");
 		}
-		
-		if (consumerInfo.getRegion()==null) {
+
+		if (consumerInfo.getRegion() == null) {
 			throw new ConsumerSigninException("please select region!!!!");
 		}
-		if (consumerInfo.getTypeOfConsumer()==null) {
+		if (consumerInfo.getTypeOfConsumer() == null) {
 			throw new ConsumerSigninException("please select consumer type!!");
 		}
-		if(consumerInfo.getPincode()<6) {
+		if (consumerInfo.getPincode() < 6) {
 			throw new ConsumerSigninException("please enter valid pincode");
 		}
-		
+
+		if (consumerInfo.getAddress1().trim() == null || consumerInfo.getAddress1().trim() == ""
+				|| consumerInfo.getAddress1().trim().length() < 20 || consumerInfo.getAddress1().trim().length() > 70) {
+			throw new ConsumerSigninException("please enter address1");
+		}
+		if (consumerInfo.getAddress2().trim() == null || consumerInfo.getAddress2().trim() == ""
+				|| consumerInfo.getAddress2().trim().length() < 10 || consumerInfo.getAddress2().trim().length() > 70) {
+			throw new ConsumerSigninException("please enter address2");
+		}
 		return dao.signinConumer(consumerInfo);
 	}// End of signinConsumer()
 
 	@Override
 	public boolean updateConsumerProfile(ConsumerInfo consumerInfo, String cPassword) {
+		if (consumerInfo.getContactNumber().toString().length() > 12||consumerInfo.getContactNumber().toString().length() < 10) {
+			throw new ConsumerUpdateException("Contact Number Must be contains 10 digits!");
+		}
 		if (!consumerInfo.getPassword().equals(cPassword)) {
 			throw new ConsumerUpdateException("Password and ConfirmPassword Not Matched try Again!!");
 		}
-		if(consumerInfo.getContactNumber().toString().length()>10) {
+		if (consumerInfo.getContactNumber().toString().length() > 10) {
 			throw new ConsumerUpdateException("Contact Number Must be contains 10 digits!");
 		}
 		return dao.updateConsumerProfile(consumerInfo);

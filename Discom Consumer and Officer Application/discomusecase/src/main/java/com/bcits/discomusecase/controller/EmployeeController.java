@@ -56,9 +56,7 @@ public class EmployeeController {
 			modelMap.addAttribute("employee", employeeInfo);
 
 			List<PaymentDetails> list = service.displayHome(employeeInfo.getRegion());
-//			PaymentDetails paymentDetails = service.getMonthlyRevenue(employeeInfo.getRegion());
 			if (list != null && !list.isEmpty()) {
-//				modelMap.addAttribute("paymentDetails", paymentDetails);
 				modelMap.addAttribute("list", list);
 			} else {
 				modelMap.addAttribute("errMsg", "Details are not found Please check the region!");
@@ -78,9 +76,7 @@ public class EmployeeController {
 		if (employeeInfo != null) {
 			// Valid details
 			List<PaymentDetails> list = service.displayHome(employeeInfo.getRegion());
-//			PaymentDetails paymentDetails = service.getMonthlyRevenue(employeeInfo.getRegion());
 			if (list != null && !list.isEmpty()) {
-//				modelMap.addAttribute("paymentDetails", paymentDetails);
 				modelMap.addAttribute("list", list);
 				modelMap.addAttribute("employee", employeeInfo);
 
@@ -113,12 +109,19 @@ public class EmployeeController {
 		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
 		if (employeeInfo != null) {
 			// Valid details
-			if (service.billUpdate(consumerCurrentBill)) {
-				modelMap.addAttribute("msg", "Bill Updation Successfull..");
+			ConsumerInfo consumerInfo = service.getConsumerInfo(consumerCurrentBill.getRrNumber());
+			if (consumerInfo.getRegion().equals(employeeInfo.getRegion())) {
+				if (service.billUpdate(consumerCurrentBill)) {
+					modelMap.addAttribute("msg", "Bill Updation Successfull..");
+				} else {
+					modelMap.addAttribute("errMsg", "Bill Updation Failed!!");
+				}
+				return "employeeBillUpdatePage";
 			} else {
-				modelMap.addAttribute("errMsg", "Bill Updation Failed!!");
+				modelMap.addAttribute("errMsg", "This consumer not in your region!");
+				return "employeeBillUpdatePage";
 			}
-			return "employeeBillUpdatePage";
+
 		} else {
 			// Invalid details
 			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
@@ -158,6 +161,7 @@ public class EmployeeController {
 		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
 		if (employeeInfo != null) {
 			// Valid details
+
 			return "employeeSearch";
 		} else {
 			// Invalid details
@@ -171,8 +175,18 @@ public class EmployeeController {
 		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
 		if (employeeInfo != null) {
 			// Valid details
-			session.setAttribute("sessionRRNumber", rrNumber);
-			modelMap.addAttribute("rrNumber", rrNumber);
+			ConsumerInfo consumerInfo = service.getConsumerInfo(rrNumber);
+
+			if (consumerInfo != null) {
+				if (consumerInfo.getRegion().equals(employeeInfo.getRegion())) {
+					session.setAttribute("sessionRRNumber", rrNumber);
+					modelMap.addAttribute("rrNumber", rrNumber);
+				} else {
+					modelMap.addAttribute("errMsg", "this consumer not in your region!");
+				}
+			} else {
+				modelMap.addAttribute("errMsg", "RR Number Not found!!!");
+			}
 			return "employeeSearch";
 		} else {
 			// Invalid details
@@ -303,7 +317,7 @@ public class EmployeeController {
 		if (employeeInfo != null) {
 			// Valid Session
 			ContactUsInfo contactUsInfo = (ContactUsInfo) session.getAttribute("contactUsInfo");
-			List<ContactUsInfo> list =(List<ContactUsInfo>)session.getAttribute("list");
+			List<ContactUsInfo> list = (List<ContactUsInfo>) session.getAttribute("list");
 			if (service.sedingResponse(suggestion, contactUsInfo)) {
 				modelMap.addAttribute("msg", "Response Sending Successful.");
 				modelMap.addAttribute("list", list);
@@ -318,5 +332,26 @@ public class EmployeeController {
 			return "employeeLogin";
 		}
 	}// End of sendResponse()
+
+	@GetMapping("/monthlyRevenue")
+	public String getMonthlyRevenue(HttpSession session, ModelMap modelMap) {
+		EmployeeInfo employeeInfo = (EmployeeInfo) session.getAttribute("valid");
+		if (employeeInfo != null) {
+			// Valid Session
+			List<Object[]> list = service.getMonthlyRevenue(employeeInfo.getRegion());
+			if (list != null && !list.isEmpty()) {
+				modelMap.addAttribute("list", list);
+				modelMap.addAttribute("employee", employeeInfo);
+			} else {
+				modelMap.addAttribute("errMsg", "Monthly Revenue Data Not Found For This region!!");
+				modelMap.addAttribute("employee", employeeInfo);
+			}
+			return "monthlyRevenue";
+		} else {
+			// Invalid Session
+			modelMap.addAttribute("errMsg", "Please LogIn First!!!");
+			return "employeeLogin";
+		}
+	}// End of getMonthlyRevenue()
 
 }// End of EmployeeController

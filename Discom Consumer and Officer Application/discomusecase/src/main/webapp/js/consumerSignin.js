@@ -31,7 +31,7 @@ function validation() {
 		return false;
 	}
 	if (contact.match(conMatch) || contact.trim().length < 10
-			|| contact.trim().length > 14) {
+			|| contact.trim().length > 12) {
 		alert('please enter proper contact number');
 		return false;
 	}

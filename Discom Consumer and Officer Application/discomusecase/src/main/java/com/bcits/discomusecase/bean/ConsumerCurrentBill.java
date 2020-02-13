@@ -30,4 +30,6 @@ public class ConsumerCurrentBill implements Serializable {
 	private Date readingsTakenOn;
 	@Column
 	private String status;
+	@Column
+	private Double paidAmount;
 }// End of class

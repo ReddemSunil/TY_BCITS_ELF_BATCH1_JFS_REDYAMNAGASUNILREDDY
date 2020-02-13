@@ -1,5 +1,6 @@
 package com.bcits.discomusecase.employeedservice;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,28 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 
 	@Override
 	public boolean billUpdate(ConsumerCurrentBill consumerCurrentBill) {
+		if (consumerCurrentBill.getRrNumber().isEmpty()||consumerCurrentBill.getRrNumber().startsWith("-")) {
+			throw new BillUpdatePageException(
+					"RR Number is not valid!!");
+		}
+		if (consumerCurrentBill.getFinalUnits()==null||consumerCurrentBill.getFinalUnits()<0) {
+			throw new BillUpdatePageException(
+					"please enter valid final units!!");
+		}
+		if (consumerCurrentBill.getReadingsTakenOn() == null||consumerCurrentBill.getDueDate()==null) {
+			throw new BillUpdatePageException(
+					"please enter valid date!!");
+		}
+		if(consumerCurrentBill.getReadingsTakenOn().compareTo(consumerCurrentBill.getDueDate())>0) {
+			throw new BillUpdatePageException(
+					"due date is not valid!!");
+		}
 		ConsumerCurrentBill consumerCurrentBill2 = dao.getConsumerCurrentBill(consumerCurrentBill.getRrNumber());
 		if (consumerCurrentBill2 != null) {
-
+			if (consumerCurrentBill2.getReadingsTakenOn().compareTo(consumerCurrentBill.getReadingsTakenOn())>0) {
+				throw new BillUpdatePageException(
+						"please enter valid readings taken date it should be more previeous readings taken!!");
+			}
 			if (consumerCurrentBill.getFinalUnits() < consumerCurrentBill2.getFinalUnits()) {
 				throw new BillUpdatePageException(
 						"Final value readings are less compare to previeous readings please check once!!");
@@ -87,7 +107,7 @@ public class EmployeeServiceDAOImpl implements EmployeeServiceDAO {
 	}// End of getAllConsumerCurrentBills()
 
 	@Override
-	public PaymentDetails getMonthlyRevenue(String region) {
+	public List<Object[]> getMonthlyRevenue(String region) {
 		return dao.getMonthlyRevenue(region);
 	}// End of getMonthlyRevenue()
 

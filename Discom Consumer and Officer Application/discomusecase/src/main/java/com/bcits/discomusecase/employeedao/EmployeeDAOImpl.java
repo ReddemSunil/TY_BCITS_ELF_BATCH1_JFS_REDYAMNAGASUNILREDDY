@@ -64,22 +64,39 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		EntityTransaction transaction = manager.getTransaction();
 		ConsumerCurrentBill bill = manager.find(ConsumerCurrentBill.class, consumerCurrentBill.getRrNumber());
 		ConsumerInfo info = manager.find(ConsumerInfo.class, consumerCurrentBill.getRrNumber());
+
 		if (info != null) {
 			if (bill != null) {
 				initialUnits = bill.getFinalUnits();
-				preAmount = bill.getAmount();
+				preAmount = bill.getAmount() - bill.getPaidAmount();
 
-				BillHistory mConsumtion = new BillHistory();
-				mConsumtion.setAmount(bill.getAmount());
-				mConsumtion.setDueDate(bill.getDueDate());
-				mConsumtion.setFinalUnits(bill.getFinalUnits());
-				mConsumtion.setInitialUnits(bill.getInitialUnits());
-				mConsumtion.setUnitsConsumed(bill.getUnitsConsumed());
-				BillHistoryPK mConsumptionPK = new BillHistoryPK();
-				mConsumptionPK.setRrNumber(bill.getRrNumber());
-				mConsumptionPK.setReadingsTakenOn(bill.getReadingsTakenOn());
+				BillHistory billHistory = null;
+				try {
+					String jpql = "from BillHistory b  where b.moPk.rrNumber=:rrNumber and b.moPk.readingsTakenOn=:date";
+					Query query = manager.createQuery(jpql);
+					query.setParameter("rrNumber", consumerCurrentBill.getRrNumber());
+					query.setParameter("date", bill.getReadingsTakenOn());
+					billHistory = (BillHistory) query.getSingleResult();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 
-				mConsumtion.setMoPk(mConsumptionPK);
+				BillHistory mConsumtion = null;
+				if (billHistory == null) {
+					mConsumtion = new BillHistory();
+					mConsumtion.setAmount(bill.getAmount());
+					mConsumtion.setDueDate(bill.getDueDate());
+					mConsumtion.setFinalUnits(bill.getFinalUnits());
+					mConsumtion.setInitialUnits(bill.getInitialUnits());
+					mConsumtion.setUnitsConsumed(bill.getUnitsConsumed());
+					mConsumtion.setPaidAmount(bill.getPaidAmount());
+					mConsumtion.setStatus(bill.getStatus());
+					BillHistoryPK mConsumptionPK = new BillHistoryPK();
+					mConsumptionPK.setRrNumber(bill.getRrNumber());
+					mConsumptionPK.setReadingsTakenOn(bill.getReadingsTakenOn());
+
+					mConsumtion.setMoPk(mConsumptionPK);
+				}
 
 				BillTariff tariff = new BillTariff();
 				Integer unitsConsumed = consumerCurrentBill.getFinalUnits() - initialUnits;
@@ -93,22 +110,25 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					bill.setUnitsConsumed(unitsConsumed);
 					bill.setAmount(amount);
 					bill.setStatus("NotPaid");
+					bill.setPaidAmount(0.0);
 					transaction.commit();
+					if (mConsumtion != null) {
 
-					transaction.begin();
-					manager.persist(mConsumtion);
-					transaction.commit();
+						transaction.begin();
+						manager.persist(mConsumtion);
+						transaction.commit();
+					}
 
 					ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
-					double cAmount = amount - mConsumtion.getAmount();
+					double cAmount = amount - preAmount;
 					MailMail mm = (MailMail) context.getBean("mailMail");
-					mm.sendMail("rnsunil.software@gmail.com", info.getMail(), "Current Bill",
-							(" rrNumber = " + bill.getRrNumber() + "\n contact Number = " + info.getContactNumber()
-									+ "\n Consumed Units = " + bill.getUnitsConsumed() + "\n Final Units = "
-									+ bill.getFinalUnits() + "\n Initial Units = " + bill.getInitialUnits()
-									+ "\n Due Date = " + bill.getDueDate() + "\n Readings Taken On = "
-									+ bill.getReadingsTakenOn() + "\n Due Amount = " + mConsumtion.getAmount()
-									+ "\n current bill = " + cAmount + "\n Total Bill = " + bill.getAmount()));
+					mm.sendMail("rnsunil.software@gmail.com", info.getMail(), "Current Bill", ("Dear Consumer,\nYour Monthly Consumption of Current bill is\n\n rrNumber = "
+							+ bill.getRrNumber() + "\n contact Number = " + info.getContactNumber()
+							+ "Dear Consumer,\nYour Monthly Consumption of Current bill is \n \n Consumed Units = "
+							+ bill.getUnitsConsumed() + "\n Final Units = " + bill.getFinalUnits()
+							+ "\n Initial Units = " + bill.getInitialUnits() + "\n Due Date = " + bill.getDueDate()
+							+ "\n Readings Taken On = " + bill.getReadingsTakenOn() + "\n Due Amount = " + preAmount
+							+ "\n current bill = " + cAmount + "\n Total Bill = " + bill.getAmount()));
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -123,6 +143,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					consumerCurrentBill.setUnitsConsumed(unitsConsumed);
 					consumerCurrentBill.setAmount(amount);
 					consumerCurrentBill.setStatus("NotPaid");
+					consumerCurrentBill.setPaidAmount(0.0);
 					manager.persist(consumerCurrentBill);
 					transaction.commit();
 
@@ -130,7 +151,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					double cAmount = consumerCurrentBill.getAmount();
 					MailMail mm = (MailMail) context.getBean("mailMail");
 					mm.sendMail("rnsunil.software@gmail.com", info.getMail(), "Current Bill",
-							(" rrNumber = " + consumerCurrentBill.getRrNumber() + "\n contact Number = "
+							(" rrNumber = " + consumerCurrentBill.getRrNumber() + "Dear Consumer,\\\\nYour Monthly Consumption of Current bill is\n\n\n contact Number = "
 									+ info.getContactNumber() + "\n Consumed Units = "
 									+ consumerCurrentBill.getUnitsConsumed() + "\n Final Units = "
 									+ consumerCurrentBill.getFinalUnits() + "\n Initial Units = "
@@ -242,18 +263,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}// End of getAllConsumerCurrentBills()
 
 	@Override
-	public PaymentDetails getMonthlyRevenue(String region) {
+	public List<Object[]> getMonthlyRevenue(String region) {
 		EntityManager manager = factory.createEntityManager();
-//		String jpql = "select sum(amount),sum(amountPaid),sum(remainingAmount) from PaymentDetails where rrNumber in (select rrNumber from ConsumerInfo where region=:region)";
-//		Query query = manager.createQuery(jpql);
-//		query.setParameter("region", region);
-//		PaymentDetails paymentDetails = (PaymentDetails) query.getSingleResult();
-		manager.createQuery(
-				"select sum(amount) from PaymentDetails where rrNumber in (select rrNumber from ConsumerInfo where region=:region)");
-//		if (paymentDetails != null) {
-//			return paymentDetails;
-//		}
-		return null;
+		String jpql = "select date_format(b.moPk.readingsTakenOn,'%Y-%m'),sum(amount),sum(paidAmount) from BillHistory b where b.moPk.rrNumber in(select rrNumber from ConsumerInfo where region=:region) group by month(b.moPk.readingsTakenOn)";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("region", region);
+		List<Object[]> list = query.getResultList();
+		if (list != null && !list.isEmpty()) {
+			return list;
+		} else {
+			return null;
+		}
 	}// End of getMonthlyRevenue()
 
 	@Override
@@ -272,14 +292,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public boolean sedingResponse(String suggestion, ContactUsInfo contactUsInfo) {
 		if (suggestion != null && !suggestion.isEmpty()) {
-			
-		ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
 
-		MailMail mm = (MailMail) context.getBean("mailMail");
-		mm.sendMail("rnsunil.software@gmail.com", contactUsInfo.getMail(), "Giving Suggestion",
-				"Your Question:" + contactUsInfo.getComments() + "\n \n Response:" + suggestion
-						+ "\n \n If You have any queries Plese Login.. Our Portal and add Comments");
-		return true;
+			ApplicationContext context = new ClassPathXmlApplicationContext("discom-bean.xml");
+
+			MailMail mm = (MailMail) context.getBean("mailMail");
+			mm.sendMail("rnsunil.software@gmail.com", contactUsInfo.getMail(), "Giving Suggestion",
+					"Your Question:" + contactUsInfo.getComments() + "\n \n Response:" + suggestion
+							+ "\n \n If You have any queries Plese Login.. Our Portal and add Comments");
+			return true;
 		}
 		return false;
 	}// End of sendingResponse()

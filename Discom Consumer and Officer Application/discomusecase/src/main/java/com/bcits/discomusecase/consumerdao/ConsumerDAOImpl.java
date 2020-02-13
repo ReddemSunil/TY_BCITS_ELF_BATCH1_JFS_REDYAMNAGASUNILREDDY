@@ -15,6 +15,7 @@ import com.bcits.discomusecase.bean.ConsumerCurrentBill;
 import com.bcits.discomusecase.bean.ConsumerInfo;
 import com.bcits.discomusecase.bean.ContactUsInfo;
 import com.bcits.discomusecase.bean.BillHistory;
+import com.bcits.discomusecase.bean.BillHistoryPK;
 import com.bcits.discomusecase.bean.PaymentDetails;
 
 @Repository
@@ -53,7 +54,7 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		return false;
@@ -155,27 +156,54 @@ public class ConsumerDAOImpl implements ConsumerDAO {
 					ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class,
 							paymentDetails.getRrNumber());
 
-					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
+//					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
 					consumerCurrentBill.setStatus("paid");
+					consumerCurrentBill.setPaidAmount(paymentDetails.getAmountPaid());
+					transaction.commit();
+					billHistoryAdding(consumerCurrentBill);
 				} else {
 					ConsumerCurrentBill consumerCurrentBill = manager.find(ConsumerCurrentBill.class,
 							paymentDetails.getRrNumber());
 
-					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
+//					consumerCurrentBill.setAmount(consumerCurrentBill.getAmount() - paymentDetails.getAmountPaid());
 					consumerCurrentBill.setStatus("paid");
+					consumerCurrentBill.setPaidAmount(paymentDetails.getAmountPaid());
 					manager.persist(paymentDetails);
+					billHistoryAdding(consumerCurrentBill);
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			transaction.commit();
+			
 			manager.close();
 			return true;
 		}
 
 		return false;
 	}// End of payment()
-	
+
+	private void billHistoryAdding(ConsumerCurrentBill bill) {
+		EntityManager manager = factory.createEntityManager();
+
+		EntityTransaction transaction = manager.getTransaction();
+		BillHistory mConsumtion = new BillHistory();
+		mConsumtion.setAmount(bill.getAmount());
+		mConsumtion.setDueDate(bill.getDueDate());
+		mConsumtion.setFinalUnits(bill.getFinalUnits());
+		mConsumtion.setInitialUnits(bill.getInitialUnits());
+		mConsumtion.setUnitsConsumed(bill.getUnitsConsumed());
+		BillHistoryPK mConsumptionPK = new BillHistoryPK();
+		mConsumptionPK.setRrNumber(bill.getRrNumber());
+		mConsumptionPK.setReadingsTakenOn(bill.getReadingsTakenOn());
+		
+		mConsumtion.setMoPk(mConsumptionPK);
+		mConsumtion.setStatus(bill.getStatus());
+		mConsumtion.setPaidAmount(bill.getPaidAmount());
+		
+		transaction.begin();
+		manager.persist(mConsumtion);
+		transaction.commit();
+	}// End of billHistoryAdding
 
 }// End of repository
